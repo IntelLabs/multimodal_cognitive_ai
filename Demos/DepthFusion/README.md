@@ -7,3 +7,5 @@ LDM3D model is a specialized version of the Stable Diffusion v1.4 model that has
 We take the generated 2D RGB image and depth map and use them to compute a 360 projection using [TouchDesigner](https://derivative.ca). TouchDesigner is a versatile platform that allows for the creation of immersive and interactive multimedia experiences. Our application harnesses the power of TouchDesigner to bring the generated 360 views to life, providing users with a unique and engaging way to experience their text prompts.
 
 Whether it's a description of a tranquil forest, a noisy cityscape, or a futuristic sci-fi world, our DepthFusion can bring these concepts to life in vivid detail.
+
+ ![](https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/LDM3D_2.gif)
