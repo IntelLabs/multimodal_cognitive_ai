@@ -38,5 +38,5 @@ Scottie Fox,
 Alex Redden
 
 
-  <img src="https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/Intel%20logo.png" align="left" width="100"> <img src="https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/Blockade%20Labs%20logo.jpeg" align="right" width="70"> 
+  <img src="https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/Intel%20logo.png" align="left" width="100"> <img src="https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/BlockadeLogo1.png" align="right" width="130"> 
 
