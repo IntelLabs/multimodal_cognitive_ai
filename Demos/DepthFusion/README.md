@@ -8,4 +8,8 @@ We take the generated 2D RGB image and depth map and use them to compute a 360 p
 
 Whether it's a description of a tranquil forest, a noisy cityscape, or a futuristic sci-fi world, our DepthFusion can bring these concepts to life in vivid detail.
 
+[![](https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/art_video_YT.jpg)](https://www.youtube.com/watch?v=XchXw6W4Xr0)
+
+Demo preview:
+
  ![](https://github.com/IntelLabs/multimodal_cognitive_ai/blob/main/Demos/DepthFusion/LDM3D_2.gif)
