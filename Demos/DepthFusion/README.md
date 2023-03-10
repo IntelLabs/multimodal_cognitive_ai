@@ -29,8 +29,9 @@ Vasudev Lal
 
 
 Intel:
-Fabio Nonato, 
-Jean Yu
+Jean Yu,
+Fabio Nonato
+
 
 #### Blockade Labs Collaborators:
 Scottie Fox,
