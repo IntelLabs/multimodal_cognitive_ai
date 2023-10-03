@@ -4,6 +4,7 @@
 @import "{{ site.theme }}";
 .page-header {
     background-color: #0054AE ;
+    background-image: none ;
     color: #fff;
     text-align: center;
 }
@@ -12,5 +13,5 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    color: #159957
+    color: #001E50;
 }
