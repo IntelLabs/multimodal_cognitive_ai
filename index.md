@@ -2,6 +2,6 @@
 layout: default
 ---
 
-## Publications
+# Publications
 
-### LDM3D
+## LDM3D
