@@ -213,9 +213,9 @@
         <p style="font-size:1.37vw;">
           CLIP-InterpreT is an interpretability tool for exploring the inner workings of <a href="https://openai.com/research/clip">CLIP</a>-like foundational models. 
           CLIP is one of the most popular vision-language foundational models and is heavilty utilized as a base model when developing new models for tasks such as video retrieval, 
-          image generation, and visual navigation. Hence, it is critical to understand the inner workings of CLIP. The interepretability 
-          analyses provided here are inspired from the <a href="https://arxiv.org/abs/2310.05916">ICLR 2024</a> paper.
-          This tool supports a wide-range of CLIP-like models and provides five types of interpretability analyses:
+          image generation, and visual navigation. Hence, it is critical to understand the inner workings of CLIP. To understand more
+          about the inner workings of the algorithms used in this demo, refer to the <a href="https://arxiv.org/abs/2310.05916">ICLR 2024</a> 
+          paper. This tool supports a wide-range of CLIP-like models and provides five types of interpretability analyses:
 
         </p>
       </div>
@@ -247,7 +247,12 @@
       <h3 class="title is-3 publication-title" id="image-property">Property-based nearest neighbors search</h3>
 
       <p style="font-size:1.37vw;">
-        In this analysis, we show that CLIP layers and heads can be characterized  by specific properties such as colors, locations, animals, etc. We retrieve the top-4 most similar images from <a href="https://www.image-net.org/">ImageNet</a> for a selected property. 
+        In this analysis, we show that CLIP layers and heads can be characterized  by specific properties such as colors, locations, animals, etc. 
+        We retrieve the top-4 most similar images from <a href="https://www.image-net.org/">ImageNet</a> validation dataset for a selected property. 
+        The properties have been labelled with <a href="https://chat.openai.com/">ChatGPT</a> using in-context learning. We provide 
+        text-span ouputs and manually labelled properties as in-context examples and ask ChatGPT to identify the properties
+        for all the other layers & heads for each of the models. The properties that are common across layers and heads 
+        for each model for combined and presented.
         Below, we show the examples for each of the properties. Here, the blue color corresponds to the description provided in the text input.
       </p>
       <br>
@@ -303,7 +308,7 @@
       <div class=".gap-10"></div>
         <img width="100%" src="images/Vit-l-14-laoin-location-l22-h13-topic-seg.png">
         <p style="font-size:1.37vw;">
-          <i><b>Topic Segmentation results for Layer 22, Head 13 (a "geolocation" head).</b> The model used is ViT-L-14 (LAION-400M).</i>
+          <i><b>Topic Segmentation results for Layer 22, Head 13 (a "geolocation" head).</b> The model used is ViT-L-14 (LAION-2B).</i>
           The blue color is focused on "Eiffle tower", "Christ", "Statue of Liberty" and "Taj Mahal"  which are in France, NewYork, Brazil
           and India respectively as provided in the text input. Interesting to note that, there is no explicit information provided 
           such as Eiffle tower is in Paris, France. The Layer 22, Head 13 has geolocation properties which implicitly identifies it.
@@ -312,7 +317,7 @@
         <div class=".gap-10"></div>
           <img width="100%" src="images/vit-b-16-openai-environment-l11-h3-topic-seg.png">
           <p style="font-size:1.37vw;">
-            <i><b>Topic Segmentation results for Layer 11, Head 3 (an "environment/weather" head).</b> The model used is ViT-B-16 (LAION-400M).</i>
+            <i><b>Topic Segmentation results for Layer 11, Head 3 (an "environment/weather" head).</b> The model used is ViT-B-16 (LAION-2B).</i>
             In the first image (left), the heatmap (blue) is focused on "flowers" which matched the text description.
             In the second image (middle), the heatmap (blue) is concentrated on the "tornado" matching the text description.
             In the last image, the heatmap (blue) is focused on "sun" matching the description "Hot Summer".
@@ -343,19 +348,19 @@
       <div class=".gap-10"></div>
         <img width="100%" src="images/Vit-b-16-laoin-france-contrastive-seg.png">
         <p style="font-size:1.37vw;">
-          <i><b>Image shows the contrastive Segmentation between portions of the image containing "tower" and "wine".</b> The model used is ViT-L-16 (LAION-400M).</i>
+          <i><b>Image shows the contrastive Segmentation between portions of the image containing "tower" and "wine".</b> The model used is ViT-L-16 (LAION-2B).</i>
         </p>
         <br>
         <div class=".gap-10"></div>
           <img width="100%" src="images/thunder_contrastive_seg.png">
           <p style="font-size:1.37vw;">
-            <i><b>Image shows the contrastive Segmentation between portions of the image containing "tornado" and "thunderstorm".</b> The model used is ViT-L-14 (LAION-400M).</i>
+            <i><b>Image shows the contrastive Segmentation between portions of the image containing "tornado" and "thunderstorm".</b> The model used is ViT-L-14 (LAION-2B).</i>
           </p>
           <br>
           <div class=".gap-10"></div>
             <img width="100%" src="images/Thor_contrastive_seg.png">
             <p style="font-size:1.37vw;">
-              <i><b>Image shows the contrastive Segmentation between portions of the image containing "hammer" and "hair" of Marvel action figure Thor.</b> The model used is ViT-L-14 (LAION-400M).</i>
+              <i><b>Image shows the contrastive Segmentation between portions of the image containing "hammer" and "hair" of Marvel action figure Thor.</b> The model used is ViT-L-14 (LAION-2B).</i>
             </p>
     </div>
   </div>
@@ -380,7 +385,7 @@
       <div class=".gap-10"></div>
         <img width="100%" src="images/Nearest_neighbours_vit-l-14-laion.png">
         <p style="font-size:1.37vw;">
-          <i><b>Top-8 nearest neighbors per head and image.</b> The model used is ViT-L-14 pretrained on LAION-400M.</i>
+          <i><b>Top-8 nearest neighbors per head and image.</b> The model used is ViT-L-14 pretrained on LAION-2B.</i>
         </p>
         <br>
         <div class=".gap-10"></div>
@@ -410,7 +415,7 @@
       <div class=".gap-10"></div>
         <img width="100%" src="images/Vit-l-14-laoin-nearest-neighbours-text.png">
         <p style="font-size:1.37vw;">
-          <i><b>Nearest neighbors retrieved for the top TextSpan outputs of a given layer and head.</b> The model used is ViT-L-14 pretrained on LAION-400M.</i>
+          <i><b>Nearest neighbors retrieved for the top TextSpan outputs of a given layer and head.</b> The model used is ViT-L-14 pretrained on LAION-2B.</i>
         </p>
         <br>
     </div>
