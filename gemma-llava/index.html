@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="llava-gemma">
+  <meta property="og:title" content="llava-gemma"/>
+  <meta property="og:description" content="llava-gemma"/>
+  <meta property="og:url" content="https://shacharosn.github.io/prompt-engineering/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="llava-gemma">
+  <meta name="twitter:description" content="llava-gemma">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/static/images/comparisons_interface.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Vision-and-Language Models, Multimodal Models, LLaVA">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>gemma-llava</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.19.0/gradio.js"></script>
+</head>
+<style>
+  body {
+    font-size:20px;
+    margin:60px auto;
+    width:auto;
+    max-width:900px;
+  }
+
+  h2 {
+			font-size: 28pt;
+      text-align: center;
+		}
+
+		h3 {
+			font-size: 20pt;
+      text-align: center;
+		}
+
+		h4 {
+			font-size: 16pt;
+		}
+
+
+  hr {
+    border:0;
+    height:1.0px;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  }
+
+  .gap-30 {
+  width:100%;
+  height:30px;
+  }
+
+  .gap-20 {
+  width:100%;
+  height:20px;
+  }
+
+  .gap-10 {
+  width:100%;
+  height:10px;
+  }
+
+  .gap-5 {
+  width:100%;
+  height:5px;
+  }
+  .paper {
+    max-width: 700px;
+  }
+  @media (max-width: 910px) {
+    .paper {
+      max-width: 500px;
+    }
+  }
+  @media (max-width: 610px) {
+    .paper {
+      max-width: 300px;
+    }
+  }
+
+</style>
+<body>
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">-->
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">CLIP-InterpreT: An interpretability Tool for CLIP-like Models</h1>
+              <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="https://muhark.github.io/about" target="_blank">Musashi Hinck</a>,&nbsp;</span>
+                    <span class="author-block">
+                  <a href="https://scholar.google.com/citations?user=xcGKR8EAAAAJ&hl=en" target="_blank">Matthew L. Olson</a>,&nbsp;</span>
+                    <span class="author-block">
+                  <a href="" target="_blank">David J. Cobbley</a>,&nbsp;</span>
+                    <span class="author-block">
+                  <a href="" target="_blank">Shao-Yen Tseng</a>,&nbsp;</span>
+                    <span class="author-block">
+                  <a href="https://scholar.google.com/citations?user=Qbu4oKwAAAAJ&hl=en" target="_blank">Vasudev Lal</a></span>
+                <span class="author-block">  
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">Intel Labs</span> 
+              </div>
+
+<!--                  &lt;!&ndash; Github link &ndash;&gt;-->
+<!--                  <span class="link-block">-->
+<!--                    <a href="https://github.com/YOUR REPO HERE" target="_blank"-->
+<!--                    class="external-link button is-normal is-rounded is-dark">-->
+<!--                    <span class="icon">-->
+<!--                      <i class="fab fa-github"></i>-->
+<!--                    </span>-->
+<!--                    <span>Code</span>-->
+<!--                  </a>-->
+<!--                </span>-->
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/abs/2311.12229" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span> -->
+                </a>
+              </span>
+
+                <!-- Demo Link -->
+                <!-- <span class="link-block">
+                  <a href="http://18.217.81.42:7860/" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:20px">&#x1F917;</p>
+                  </span>
+                  <span>Demo</span>
+                </a>
+              </span> -->
+
+              <!-- <span class="link-block">
+                  <a href="" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span> -->
+
+              <!-- <span class="link-block">
+                  <a href="https://youtu.be/l6IVjBvVc_E?si=GvFGA7PI_I9zTYN9" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>    -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gradio layout code -->
+
+<!-- <section class="hero teaser"  style="background-color:#efeff081">
+  <div class="container is-max-desktop" id="gradio" style="width:800px; margin:0 auto;">
+    <gradio-app src="http://18.217.81.42:7860/"></gradio-app>
+  </div>
+</section> -->
+
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h3 class="title is-3 publication-title">Introduction</h3>
+
+        <div style="font-size:1.37vw;">
+          <p>
+            We train and release a suite of multimodal foundation models (MMFM,
+            aka Large Multimodal Models) built on the popular LLaVA framework with
+            the Gemma family of Large Language Models (LLMS) recently released by
+            Google. Of particular interest is the 2B parameter Gemma model, which
+            provides opportunities to efficiently prototype and test hypotheses
+            concerning the design space of LLaVA-style models.
+
+            In line with findings from other work on LLaVA-style models, we test
+            the effect of ablating three design features: pretraining the connector,
+            utilizing a more powerful image backbone, and increasing the size of the
+            language backbone. The resulting models, which we call LLaVA-Gemma,
+            exhibit moderate performance on an array of evaluations, but fail to
+            improve past the current comparably-sized SOTA models. Closer analysis
+            of performance shows mixed effects; skipping pretraining tends to reduce
+            performance, larger vision models sometimes improve performance, and
+            increasing language model size has inconsistent results.
+
+            We publicly release training recipes, code and weights for our
+            models, trained on Intel’s Gaudi 2 AI Accelerators with Deepspeed.
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<hr>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title" id="image-property">Try it out!</h3>
+
+
+    <p>The base versions of the llava-gemma models are available on
+    HuggingFace (HF) at <a href=>Intel/llava-gemma-2b</a>. While these checkpoints have been converted to the HF version of LLaVA, their usage currently requires a modified preprocessor (available
+    <a href="https://huggingface.co/Intel/llava-gemma-2b/blob/main/processing_llavagemma.py">here</a>).</p>
+    <p>With preprocessing_llavagemma.py copied to the appropriate location (e.g. the directory you are running your script from), you can try out
+    the llava-gemma checkpoint using the following code snippet:</p>
+
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> (</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  LlavaForConditionalGeneration,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  AutoTokenizer,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  CLIPImageProcessor</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> processing_llavagemma <span class="im">import</span> LlavaGemmaProcessor <span class="co"># This is in this repo</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>checkpoint <span class="op">=</span> <span class="st">&quot;Intel/llava-gemma-2b&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load model</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LlavaForConditionalGeneration.from_pretrained(checkpoint)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>processor <span class="op">=</span> LlavaGemmaProcessor(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    tokenizer<span class="op">=</span>AutoTokenizer.from_pretrained(checkpoint),</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    image_processor<span class="op">=</span>CLIPImageProcessor.from_pretrained(checkpoint)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare inputs</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Use gemma chat template</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> processor.tokenizer.apply_chat_template(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    [{<span class="st">&#39;role&#39;</span>: <span class="st">&#39;user&#39;</span>, <span class="st">&#39;content&#39;</span>: <span class="st">&quot;What&#39;s the content of the image?&lt;image&gt;&quot;</span>}],</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    tokenize<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    add_generation_prompt<span class="op">=</span><span class="va">True</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&quot;https://www.ilankelman.org/stopsigns/australia.jpg&quot;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> Image.<span class="bu">open</span>(requests.get(url, stream<span class="op">=</span><span class="va">True</span>).raw)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>inputs <span class="op">=</span> processor(text<span class="op">=</span>prompt, images<span class="op">=</span>image, return_tensors<span class="op">=</span><span class="st">&quot;pt&quot;</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>inputs <span class="op">=</span> {k: v.to(<span class="st">&#39;cuda&#39;</span>) <span class="cf">for</span> k, v <span class="kw">in</span> inputs.items()}</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>generate_ids <span class="op">=</span> model.generate(<span class="op">**</span>inputs, max_length<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> processor.batch_decode(generate_ids, skip_special_tokens<span class="op">=</span><span class="va">True</span>, clean_up_tokenization_spaces<span class="op">=</span><span class="va">False</span>)[<span class="dv">0</span>]</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(output)</span></code></pre></div>
+
+    </div>
+  </div>
+
+</section>
+
+<hr>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">LLaVA</h3>
+
+      <p style="font-size:1.37vw;">
+        <a href="https://llava-vl.github.io">LLaVA (Large Language and Vision Assistant)</a> is a lightweight and powerful framework for combining pretrained langauge and vision models into a multimodal chatbot capable of taking combined vision and language inputs.
+      </p>
+
+      <p>
+        The "recipe" consists of three components and two training steps.  The three components are a pretrained language model, a pretrained vision encoder, and a connector. In the v1.5 recipe, the language model is Vicuna, the vision encoder CLIP ViT-L/14, and the connector a 2-layer perceptron.  The first stage pretrains the MLP connector by training on a dataset of 595k vision-language samples filtered from CC3M.  The second stage jointly finetunes the language modela nd connector using a mixture of 665 multimodal instruction tuning examples.
+      </p>
+
+
+
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">Gemma</h3>
+
+        <p>Gemma is <a href="https://ai.google.dev/gemma">“[a] family of lightweight, state-of-the art open models built from the same research and technology used to create the Gemini models”</a> released by Google in February 2024.</p>
+        <p>We use the instruction-tuned checkpoints available on HuggingFace (<code>gemma-2b-it</code> and <code>gemma-7b-it</code>).</p>
+
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">Performance</h3>
+
+<p>Using the LLaVA-v1.5 recipe, the models achieve reasonable but
+unspectacular performance on a range of multimodal benchmarks, failing
+to beat the 7B-parameter LLaVA model. We are currently experimenting
+with various techniques to improve the performance of the Gemma-based
+LLaVA model, which we will update this page with as we publish
+results.</p>
+
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">
+<strong>Language</strong>
+</td>
+<td style="text-align: left;">
+<strong>Vision</strong>
+</td>
+<td style="text-align: center;">
+</td>
+<td colspan="2" style="text-align: center;">
+<strong>MME</strong>
+</td>
+<td style="text-align: center;">
+<strong>MM-</strong>
+</td>
+<td colspan="2" style="text-align: center;">
+<strong>POPE</strong>
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+<strong>ScienceQA</strong>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">
+<strong>Model</strong>
+</td>
+<td style="text-align: left;">
+<strong>Model</strong>
+</td>
+<td style="text-align: center;">
+<strong>GQA</strong>
+</td>
+<td style="text-align: center;">
+<strong>Cog.</strong>
+</td>
+<td style="text-align: center;">
+<strong>Per.</strong>
+</td>
+<td style="text-align: center;">
+<strong>Vet</strong>
+</td>
+<td style="text-align: center;">
+<strong>Acc.</strong>
+</td>
+<td style="text-align: center;">
+<strong>F1</strong>
+</td>
+<td style="text-align: center;">
+<strong>VQAv2</strong>
+</td>
+<td style="text-align: center;">
+<strong>MMVP</strong>
+</td>
+<td style="text-align: center;">
+<strong>Image</strong>
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">
+<code>gemma-2b-it</code>
+</td>
+<td style="text-align: left;">
+<code>CLIP</code>
+</td>
+<td style="text-align: center;">
+0.531
+</td>
+<td style="text-align: center;">
+236
+</td>
+<td style="text-align: center;">
+1130
+</td>
+<td style="text-align: center;">
+17.7
+</td>
+<td style="text-align: center;">
+0.850
+</td>
+<td style="text-align: center;">
+0.839
+</td>
+<td style="text-align: center;">
+70.7
+</td>
+<td style="text-align: center;">
+0.287
+</td>
+<td style="text-align: center;">
+0.564
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">
+<code>gemma-7b-it</code>
+</td>
+<td style="text-align: left;">
+<code>CLIP</code>
+</td>
+<td style="text-align: center;">
+0.472
+</td>
+<td style="text-align: center;">
+254
+</td>
+<td style="text-align: center;">
+895
+</td>
+<td style="text-align: center;">
+18.2
+</td>
+<td style="text-align: center;">
+0.848
+</td>
+<td style="text-align: center;">
+0.829
+</td>
+<td style="text-align: center;">
+68.7
+</td>
+<td style="text-align: center;">
+0.327
+</td>
+<td style="text-align: center;">
+0.625
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">
+<code>Phi-2b</code>
+</td>
+<td style="text-align: left;">
+<code>CLIP</code>
+</td>
+<td style="text-align: center;">
+-
+</td>
+<td style="text-align: center;">
+-
+</td>
+<td style="text-align: center;">
+1335
+</td>
+<td style="text-align: center;">
+28.9
+</td>
+<td style="text-align: center;">
+-
+</td>
+<td style="text-align: center;">
+0.850
+</td>
+<td style="text-align: center;">
+71.4
+</td>
+<td style="text-align: center;">
+-
+</td>
+<td style="text-align: center;">
+0.684
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">
+<code>Llama-2-7b</code>
+</td>
+<td style="text-align: left;">
+<code>CLIP</code>
+</td>
+<td style="text-align: center;">
+0.620
+</td>
+<td style="text-align: center;">
+348
+</td>
+<td style="text-align: center;">
+1511
+</td>
+<td style="text-align: center;">
+30.6
+</td>
+<td style="text-align: center;">
+0.850
+</td>
+<td style="text-align: center;">
+0.859
+</td>
+<td style="text-align: center;">
+78.5
+</td>
+<td style="text-align: center;">
+46.1
+</td>
+<td style="text-align: center;">
+0.704
+</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
