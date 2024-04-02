@@ -272,7 +272,8 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
         <h2 class="title is-3">How to use</h2>
         <div class="content has-text-justified">
           <p>
-            <h3 class="title is-3">On GPU</h3>
+            <h3 class="title is-5">On GPU</h2>
+
 <code>
   <pre>
     <script type="application/python">
@@ -293,7 +294,6 @@ output.depth[0].save("lemon_ldm3d_depth.png")
 <code>
   <pre>
     <script type="application/python">
-        <![CDATA[
   from PIL import Image
 from diffusers import StableDiffusionUpscaleLDM3DPipeline
 
@@ -308,11 +308,10 @@ outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image",
 upscaled_rgb, upscaled_depth =outputs.rgb[0], outputs.depth[0]
 upscaled_rgb.save(f"upscaled_lemons_rgb.png")
 upscaled_depth.save(f"upscaled_lemons_depth.png")
-]]>
             </script>
         </pre>
 </code>
-<h3 class="title is-3">On Gaudi</h3>
+<h3 class="title is-5">On Gaudi</h2>
           </div>
             <div style="display: flex; justify-content: center;">
               <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
