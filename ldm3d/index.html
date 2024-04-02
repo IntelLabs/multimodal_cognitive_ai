@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>LVLM-Interpret </title>
+  <title>LDM3D </title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -182,7 +182,7 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
 
  We also developed an extension to LDM3D: LDM3D-VR, a suite of diffusion models targeting virtual reality development that includes LDM3D-pano and LDM3D-SR. These models enable the generation of panoramic RGBD based on textual prompts and the upscaling of low-resolution inputs to high-resolution RGBD, respectively. Our models are fine-tuned from existing pretrained models on datasets containing panoramic/high-resolution RGB images, depth maps and captions.
 
- In this project page, we will present these models and how to use them on Habana Gaudi and on NVIDIA GPU with <a href="https://github.com/huggingface/diffusers">Diffusers</a> and <a href="https://github.com/huggingface/optimum">Optimum</a>.
+ In this project page, we will present these models and how to use them on Habana Gaudi and on NVIDIA GPU with <a href="https://github.com/huggingface/diffusers">Diffusers</a> and <a href="https://github.com/huggingface/optimum">Optimum</a>.</p>
       </div>
         
     </div>
@@ -200,9 +200,10 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
           <p>
             In order to capture both RGB and depth representations in the latent space, we modified the KL-autoencoder. The KL-encoder now takes as input a RGBD image to create a latent representation of both RGB and depth. After having added noise to this latent, the U-Net will play its role of iteratively denoising it.
             A frozen CLIP-text model is used to encode the text prompt and the embedding created from it is then integrated into the U-Net through cross-attention
-            Finally, the modified KL-decoder decodes the denoised latent representation back to the pixel space as a RGBD output = (RGB, 16-bit grayscale depth map)    </div>
+            Finally, the modified KL-decoder decodes the denoised latent representation back to the pixel space as a RGBD output = (RGB, 16-bit grayscale depth map)</p></div>
             <div style="display: flex; justify-content: center;">
               <img src="https://huggingface.co/Intel/ldm3d/resolve/main/model_overview.png" width="600">
+              
           </div>
   </div>
 </section>
@@ -217,13 +218,14 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
         <div class="content has-text-justified">
           <p>
             LDM3D-VR is a suite of diffusion models targeting virtual reality development. These models enable the generation of panoramic RGBD based on textual prompts and the upscaling of low-resolution inputs to high-resolution RGBD. The models included in LDM3D-VR are:
-
-            - <a href="https://huggingface.co/Intel/ldm3d-pano">ldm3d-pano</a>further finetunes the previous [ldm3d-4c](https://huggingface.co/Intel/ldm3d-4c) checkpoint on panoramic image datasets to generate better panoramas.
-            - <a href="https://huggingface.co/Intel/ldm3d-sr">ldm3d-sr</a> performs x4 upscaling and recovers high-resolution RGB and depth maps from low-resolution panorama inputs.
-           
+            <ul>
+              <li> <a href="https://huggingface.co/Intel/ldm3d-pano">ldm3d-pano</a>further finetunes the previous [ldm3d-4c](https://huggingface.co/Intel/ldm3d-4c) checkpoint on panoramic image datasets to generate better panoramas.</li>
+                <li><a href="https://huggingface.co/Intel/ldm3d-sr">ldm3d-sr</a> performs x4 upscaling and recovers high-resolution RGB and depth maps from low-resolution panorama inputs.</li>
+          </ul>
             Training and inference pipeline are shown in the image below:  </div>
             <div style="display: flex; justify-content: center;">
               <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
+            </p>
           </div>
   </div>
 </section>
@@ -241,7 +243,7 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
 
 - We developed an application called DepthFusion, which uses the image-to-image pipeline of LDM3D to create immersive and interactive 360-degree-view experiences using TouchDesigner. This technology has the potential to transform a wide range of industries, from entertainment and gaming to architecture and design.
  Here are [some examples](https://www.youtube.com/watch?v=6oS7gSQzFCI) of use of this application.
-[This QR code](assets/model_overview.png) leads to an immersive experience demonstration. If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move around the space with the phone to experience the VR even more.
+[This QR code](assets/model_overview.png) leads to an immersive experience demonstration. If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move around the space with the phone to experience the VR even more.</p>
   </div>
             <div style="display: flex; justify-content: center;">
               <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
@@ -315,7 +317,14 @@ upscaled_depth.save(f"upscaled_lemons_depth.png")
             <div style="display: flex; justify-content: center;">
               <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
           </div>
+          <div class="content has-text-justified">
+            <p>
+         On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
+LDM3D is also implemented in the [optimum-habana library](https://github.com/huggingface/optimum-habana) from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it really simple to use on a HPU device with a simple “import” from that library. You will be able to benefit from Gaudi’s performances and run LDM3D out of the box.
+[After installing the package](https://github.com/huggingface/optimum-habana#install), here is how to run inference: </p>
           <code>
+
+            
             <pre>
               <script type="application/python">
                   <![CDATA[
