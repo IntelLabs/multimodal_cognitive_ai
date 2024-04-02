@@ -272,6 +272,9 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
           <p>
             <h3 class="title is-3">On GPU</h3>
 <code>
+  <pre>
+    <script type="application/python">
+        <![CDATA[
   from diffusers import StableDiffusionLDM3DPipeline
 model_name = "Intel/ldm3d-4c"
 pipe = StableDiffusionLDM3DPipeline.from_pretrained(model_name)
@@ -280,9 +283,15 @@ prompt = "A picture of some lemons on a table"
 output = pipe( prompt,  width=1024, height=512, guidance_scale=7.0, num_inference_steps=50 )
 output.rgb[0].save("lemon_ldm3d_rgb.jpg")
 output.depth[0].save("lemon_ldm3d_depth.png")
+]]>
+            </script>
+        </pre>
 </code>
 
 <code>
+  <pre>
+    <script type="application/python">
+        <![CDATA[
   from PIL import Image
 from diffusers import StableDiffusionUpscaleLDM3DPipeline
 
@@ -297,13 +306,20 @@ outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image",
 upscaled_rgb, upscaled_depth =outputs.rgb[0], outputs.depth[0]
 upscaled_rgb.save(f"upscaled_lemons_rgb.png")
 upscaled_depth.save(f"upscaled_lemons_depth.png")
+]]>
+            </script>
+        </pre>
 </code>
 <h3 class="title is-3">On Gaudi</h3>
           </div>
             <div style="display: flex; justify-content: center;">
               <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
           </div>
-          <code>from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
+          <code>
+            <pre>
+              <script type="application/python">
+                  <![CDATA[
+                  from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
             from optimum.habana.utils import set _seed
             model_name = "Intel/ldm3d-4c"
             prompt = "A picture of some lemons on a table"
@@ -319,7 +335,9 @@ upscaled_depth.save(f"upscaled_lemons_depth.png")
                output_type="pil",
               negative_prompt=None)
             output.rgb[0].save("lemon_ldm3d_rgb.jpg")
-            output.depth[0].save("lemon_ldm3d_depth.png")</code>
+            output.depth[0].save("lemon_ldm3d_depth.png") ]]>
+          </script>
+      </pre></code>
   </div>
 </section>
 	
