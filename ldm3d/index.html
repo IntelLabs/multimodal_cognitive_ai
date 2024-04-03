@@ -312,7 +312,7 @@
           <div class="content has-text-justified">
             <p>
             <h3 class="title is-5">On GPU</h2>
-  
+
               <code>
                     <pre>
                       <!-- <script type="application/python"> -->
@@ -331,7 +331,7 @@
                 <img src="static/images/ldm3d_4c_results.png" width="600">
               </div>
           </div>
-  
+
           <code>
                     <pre>
                   from PIL import Image
@@ -356,15 +356,16 @@
           <div style="display: flex; justify-content: center;">
             <img src="static/images/ldm3d_sr_depth_results.png" width="600">
           </div>
-  
-  
+
+
           <div class="content has-text-justified">
             <h3 class="title is-5">On Gaudi</h2>
-  
+
               <div class="content has-text-justified">
                 <p>
                   On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
-                  LDM3D is also implemented in the <a href="https://github.com/huggingface/optimum-habana">optimum-habana
+                  LDM3D is also implemented in the <a
+                    href="https://github.com/huggingface/optimum-habana">optimum-habana
                     library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it
                   really simple to use on a HPU device with a simple “import” from that library. You will be able to
                   benefit
@@ -374,8 +375,8 @@
                   how to run inference:
                 </p>
                 <code>
-  
-  
+
+
                       <pre>
                       from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
                       from optimum.habana.utils import set _seed
@@ -419,7 +420,7 @@
             archivePrefix={arXiv},
             primaryClass={cs.CV}
       }</code></pre>
-          
+
           <pre><code>@misc{stan2023ldm3dvr,
             title={LDM3D-VR: Latent Diffusion Model for 3D VR},
             author={Gabriela Ben Melech Stan and Diana Wofk and Estelle Aflalo and Shao-Yen Tseng and Zhipeng Cai and
