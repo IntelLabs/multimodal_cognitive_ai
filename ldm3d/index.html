@@ -289,115 +289,118 @@
               <iframe width="420" height="315" src="https://www.youtube.com/embed/6oS7gSQzFCI">
               </iframe>
             </div>
-        </div>
-        <div class="content has-text-justified"></div>
-        <h3 class="title is-5">Immersive experience</h2>
-          If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move
-          around the space with the phone to experience the VR even more.
-          <div style="display: flex; justify-content: center;"><iframe width="420" height="315"
-              src="https://www.youtube.com/embed/3hbUo-hwAs0">
-            </iframe>
-          </div>
-      </div>
 
+            <div class="content has-text-justified"></div>
+            <h3 class="title is-5">Immersive experience</h2>
+              If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move
+              around the space with the phone to experience the VR even more.
+              <div style="display: flex; justify-content: center;"><iframe width="420" height="315"
+                  src="https://www.youtube.com/embed/3hbUo-hwAs0">
+                </iframe>
+              </div>
+        </div>
+      </div>
     </div>
-    </div>
+
   </section>
 
   <section class="section" style="background-color:#f7f7f881">
     <div class="container is-max-desktop">
-      <!-- Abstract. -->
       <div class="columns is-centered has-text-justified">
         <div class="column is-six-fifths">
           <h2 class="title is-3">How to use</h2>
           <div class="content has-text-justified">
             <p>
             <h3 class="title is-5">On GPU</h2>
-
+  
               <code>
-                <pre>
-                  <!-- <script type="application/python"> -->
-                from diffusers import StableDiffusionLDM3DPipeline
-              model_name = "Intel/ldm3d-4c"
-              pipe = StableDiffusionLDM3DPipeline.from_pretrained(model_name)
-              pipe.to("cuda")
-              prompt = "A picture of some lemons on a table"
-              output = pipe( prompt,  width=1024, height=512, guidance_scale=7.0, num_inference_steps=50 )
-              output.rgb[0].save("lemon_ldm3d_rgb.jpg")
-              output.depth[0].save("lemon_ldm3d_depth.png")
-                          <!-- </script> -->
-                      </pre>
-              </code>
+                    <pre>
+                      <!-- <script type="application/python"> -->
+                    from diffusers import StableDiffusionLDM3DPipeline
+                  model_name = "Intel/ldm3d-4c"
+                  pipe = StableDiffusionLDM3DPipeline.from_pretrained(model_name)
+                  pipe.to("cuda")
+                  prompt = "A picture of some lemons on a table"
+                  output = pipe( prompt,  width=1024, height=512, guidance_scale=7.0, num_inference_steps=50 )
+                  output.rgb[0].save("lemon_ldm3d_rgb.jpg")
+                  output.depth[0].save("lemon_ldm3d_depth.png")
+                              <!-- </script> -->
+                          </pre>
+                  </code>
               <div style="display: flex; justify-content: center;">
                 <img src="static/images/ldm3d_4c_results.png" width="600">
               </div>
           </div>
+  
+          <code>
+                    <pre>
+                    from PIL import Image
+                  from diffusers import DiffusionPipeline
+    
+                  #Upscale the rgb and depth to a resolution of (1024, 1024)
+                  pipe_ldm3d_upscale =  DiffusionPipeline.from_pretrained("Intel/ldm3d-sr", custom_pipeline="pipeline_stable_diffusion_upscale_ldm3d")
+                  pipe_ldm3d_upscale.to("cuda")
+    
+                  low_res_img = Image.open(f"lemons_ldm3d_rgb.jpg").convert("RGB")
+                  low_res_depth = Image.open(f"lemons_ldm3d_depth.png").convert("L")
+                  outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image", rgb=low_res_img, depth=low_res_depth, num_inference_steps=50, target_res=[1024, 1024])
+    
+                  upscaled_rgb, upscaled_depth =outputs.rgb[0], outputs.depth[0]
+                  upscaled_rgb.save(f"upscaled_lemons_rgb.png")
+                  upscaled_depth.save(f"upscaled_lemons_depth.png")
+                          </pre>
+                      </code>
+          <div style="display: flex; justify-content: center;">
+            <img src="static/images/ldm3d_sr_rgb_results.png" width="600">
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <img src="static/images/ldm3d_sr_depth_results.png" width="600">
+          </div>
+  
+  
+          <div class="content has-text-justified">
+            <h3 class="title is-5">On Gaudi</h2>
+  
+              <div class="content has-text-justified">
+                <p>
+                  On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
+                  LDM3D is also implemented in the <a href="https://github.com/huggingface/optimum-habana">optimum-habana
+                    library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it
+                  really simple to use on a HPU device with a simple “import” from that library. You will be able to
+                  benefit
+                  from Gaudi’s performances and run LDM3D out of the box.
+                  <a href="https://github.com/huggingface/optimum-habana#install">After installing the package</a>, here
+                  is
+                  how to run inference:
+                </p>
+                <code>
+  
+  
+                      <pre>
+                            from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
+                      from optimum.habana.utils import set _seed
+                      model_name = "Intel/ldm3d-4c"
+                      prompt = "A picture of some lemons on a table"
+                      scheduler = GaudiDDIMScheduler.from_pretrained(model_name, subfolder="scheduler")
+                      pipe = GaudiStableDiffusionLDM3DPipeline.from_pretrained( model_name,
+                        scheduler=scheduler,
+                        use_habana=True,
+                        use_hpu_graphs=True,
+                        gaudi_config="Habana/stable-diffusion")
+                      output = pipe(prompt=["High quality photo of an astronaut riding a horse in space"],
+                        num_images_per_prompt=1,
+                        batch_size=1,
+                        output_type="pil",
+                        negative_prompt=None)
+                      output.rgb[0].save("lemon_ldm3d_rgb.jpg")
+                      output.depth[0].save("lemon_ldm3d_depth.png")
+          
+                    </pre></code>
+              </div>
+          </div>
         </div>
       </div>
-              <code>
-  <pre>
-    <script type="application/python">
-  from PIL import Image
-from diffusers import DiffusionPipeline
-
-#Upscale the rgb and depth to a resolution of (1024, 1024)
-pipe_ldm3d_upscale =  DiffusionPipeline.from_pretrained("Intel/ldm3d-sr", custom_pipeline="pipeline_stable_diffusion_upscale_ldm3d")
-pipe_ldm3d_upscale.to("cuda")
-
-low_res_img = Image.open(f"lemons_ldm3d_rgb.jpg").convert("RGB")
-low_res_depth = Image.open(f"lemons_ldm3d_depth.png").convert("L")
-outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image", rgb=low_res_img, depth=low_res_depth, num_inference_steps=50, target_res=[1024, 1024])
-
-upscaled_rgb, upscaled_depth =outputs.rgb[0], outputs.depth[0]
-upscaled_rgb.save(f"upscaled_lemons_rgb.png")
-upscaled_depth.save(f"upscaled_lemons_depth.png")
-            </script>
-        </pre>
-</code>
-              <div style="display: flex; justify-content: center;">
-                <img src="static/images/ldm3d_sr_rgb_results.png" width="600">
-              </div>
-              <div style="display: flex; justify-content: center;">
-                <img src="static/images/ldm3d_sr_depth_results.png" width="600">
-              </div>
-              <h3 class="title is-5">On Gaudi</h2>
-          </div>
-
-          <div class="content has-text-justified">
-            <p>
-              On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
-              LDM3D is also implemented in the <a href="https://github.com/huggingface/optimum-habana">optimum-habana
-                library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it
-              really simple to use on a HPU device with a simple “import” from that library. You will be able to benefit
-              from Gaudi’s performances and run LDM3D out of the box.
-              <a href="https://github.com/huggingface/optimum-habana#install">After installing the package</a>, here is
-              how to run inference:
-            </p>
-            <code>
-
-
-            <pre>
-              <script type="application/python">
-                  from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
-            from optimum.habana.utils import set _seed
-            model_name = "Intel/ldm3d-4c"
-            prompt = "A picture of some lemons on a table"
-            scheduler = GaudiDDIMScheduler.from_pretrained(model_name, subfolder="scheduler")
-            pipe = GaudiStableDiffusionLDM3DPipeline.from_pretrained( model_name,
-               scheduler=scheduler,
-              use_habana=True,
-               use_hpu_graphs=True,
-               gaudi_config="Habana/stable-diffusion")
-            output = pipe(prompt=["High quality photo of an astronaut riding a horse in space"],
-               num_images_per_prompt=1,
-               batch_size=1,
-               output_type="pil",
-              negative_prompt=None)
-            output.rgb[0].save("lemon_ldm3d_rgb.jpg")
-            output.depth[0].save("lemon_ldm3d_depth.png")
-          </script>
-      </pre></code>
-          </div>
+    </div>
   </section>
 
 
@@ -408,7 +411,24 @@ upscaled_depth.save(f"upscaled_lemons_depth.png")
       <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
           <h2 class="title">BibTeX</h2>
-          <span style='font-style:italic;'>Coming soon</span>
+          <span style='font-style:italic;'>@misc{stan2023ldm3d,
+            title={LDM3D: Latent Diffusion Model for 3D},
+            author={Gabriela Ben Melech Stan and Diana Wofk and Scottie Fox and Alex Redden and Will Saxton and Jean Yu
+            and Estelle Aflalo and Shao-Yen Tseng and Fabio Nonato and Matthias Muller and Vasudev Lal},
+            year={2023},
+            eprint={2305.10853},
+            archivePrefix={arXiv},
+            primaryClass={cs.CV}
+            }</span>
+          <span style='font-style:italic;'>@misc{stan2023ldm3dvr,
+            title={LDM3D-VR: Latent Diffusion Model for 3D VR},
+            author={Gabriela Ben Melech Stan and Diana Wofk and Estelle Aflalo and Shao-Yen Tseng and Zhipeng Cai and
+            Michael Paulitsch and Vasudev Lal},
+            year={2023},
+            eprint={2311.03226},
+            archivePrefix={arXiv},
+            primaryClass={cs.CV}
+            }</span>
           <pre><code></code></pre>
         </div>
       </section>
