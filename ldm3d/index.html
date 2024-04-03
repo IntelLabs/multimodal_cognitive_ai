@@ -219,7 +219,7 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
           <p>
             LDM3D-VR is a suite of diffusion models targeting virtual reality development. These models enable the generation of panoramic RGBD based on textual prompts and the upscaling of low-resolution inputs to high-resolution RGBD. The models included in LDM3D-VR are:
             <ul>
-              <li> <a href="https://huggingface.co/Intel/ldm3d-pano">ldm3d-pano</a>further finetunes the previous [ldm3d-4c](https://huggingface.co/Intel/ldm3d-4c) checkpoint on panoramic image datasets to generate better panoramas.</li>
+              <li> <a href="https://huggingface.co/Intel/ldm3d-pano">ldm3d-pano</a> further finetunes the previous [ldm3d-4c](https://huggingface.co/Intel/ldm3d-4c) checkpoint on panoramic image datasets to generate better panoramas.</li>
                 <li><a href="https://huggingface.co/Intel/ldm3d-sr">ldm3d-sr</a> performs x4 upscaling and recovers high-resolution RGB and depth maps from low-resolution panorama inputs.</li>
           </ul>
             Training and inference pipeline are shown in the image below:  </div>
@@ -239,30 +239,22 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
         <h2 class="title is-3">Application</h2>
         <div class="content has-text-justified">
           <p>
-            -  A Hugging Face Space has been created to visualize panoramic images in a [360 view application](https://huggingface.co/spaces/Intel/ldm3d) using the LDM3D-pano checkpoint.
+            <ul> <li> A Hugging Face Space has been created to visualize panoramic images in a <a href="https://huggingface.co/spaces/Intel/ldm3d">360 view application</a> using the LDM3D-pano checkpoint.</li>
+              <gradio-app src="https://intel-ldm3d.hf.space"></gradio-app>
+             https://www.youtube.com/watch?v=6oS7gSQzFCI We developed an application called DepthFusion, which uses the image-to-image pipeline of LDM3D to create immersive and interactive 360-degree-view experiences using TouchDesigner. This technology has the potential to transform a wide range of industries, from entertainment and gaming to architecture and design.
+                <iframe width="420" height="315"
+                src="https://www.youtube.com/watch?v=6oS7gSQzFCI">
+                </iframe></li>
+              </ul></p>
+              <h3 class="title is-5">Immersive experience</h2>
+  If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move around the space with the phone to experience the VR even more.
+  <iframe width="420" height="315"
+  src="https://www.youtube.com/watch?v=3hbUo-hwAs0">
+  </iframe>
 
-- We developed an application called DepthFusion, which uses the image-to-image pipeline of LDM3D to create immersive and interactive 360-degree-view experiences using TouchDesigner. This technology has the potential to transform a wide range of industries, from entertainment and gaming to architecture and design.
- Here are [some examples](https://www.youtube.com/watch?v=6oS7gSQzFCI) of use of this application.
-[This QR code](assets/model_overview.png) leads to an immersive experience demonstration. If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move around the space with the phone to experience the VR even more.</p>
   </div>
-            <div style="display: flex; justify-content: center;">
-              <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
-          </div>
   </div>
-</section>
-<section class="section"  style="background-color:#f7f7f881">
-  <div class="container is-max-desktop">
-    <!-- Edit interface -->
-    <div class="column is-six-fifths">
-      <h3 class="title is-5">Basic image editing function for model probing</h2>
-      <div class="content has-text-justified">
-        <div style="display: flex; justify-content: center;">
-          <img id="examples_fig" src="static/images/interface_draw.png" alt="Image editing" style="max-width: 100%; height: auto;">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="section"  style="background-color:#f7f7f881">
   <div class="container is-max-desktop">
