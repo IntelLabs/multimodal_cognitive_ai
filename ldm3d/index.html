@@ -269,7 +269,6 @@ LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth
 <code>
   <pre>
     <script type="application/python">
-        <![CDATA[
   from diffusers import StableDiffusionLDM3DPipeline
 model_name = "Intel/ldm3d-4c"
 pipe = StableDiffusionLDM3DPipeline.from_pretrained(model_name)
@@ -278,19 +277,20 @@ prompt = "A picture of some lemons on a table"
 output = pipe( prompt,  width=1024, height=512, guidance_scale=7.0, num_inference_steps=50 )
 output.rgb[0].save("lemon_ldm3d_rgb.jpg")
 output.depth[0].save("lemon_ldm3d_depth.png")
-]]>
             </script>
         </pre>
 </code>
-
+<div style="display: flex; justify-content: center;">
+  <img src="static/images/ldm3d_4c_results.png" width="600">
+</div>
 <code>
   <pre>
     <script type="application/python">
   from PIL import Image
-from diffusers import StableDiffusionUpscaleLDM3DPipeline
+from diffusers import DiffusionPipeline
 
 #Upscale the rgb and depth to a resolution of (1024, 1024)
-pipe_ldm3d_upscale = StableDiffusionUpscaleLDM3DPipeline.from_pretrained("Intel/ldm3d-sr")
+pipe_ldm3d_upscale =  DiffusionPipeline.from_pretrained("Intel/ldm3d-sr", custom_pipeline="pipeline_stable_diffusion_upscale_ldm3d")
 pipe_ldm3d_upscale.to("cuda")
 
 low_res_img = Image.open(f"lemons_ldm3d_rgb.jpg").convert("RGB")
@@ -303,22 +303,25 @@ upscaled_depth.save(f"upscaled_lemons_depth.png")
             </script>
         </pre>
 </code>
+<div style="display: flex; justify-content: center;">
+  <img src="static/images/ldm3d_sr_rgb_results.png" width="600">
+</div>
+<div style="display: flex; justify-content: center;">
+  <img src="static/images/ldm3d_sr_depth_results.png" width="600">
+</div>
 <h3 class="title is-5">On Gaudi</h2>
           </div>
-            <div style="display: flex; justify-content: center;">
-              <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
-          </div>
+
           <div class="content has-text-justified">
             <p>
          On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
-LDM3D is also implemented in the [optimum-habana library](https://github.com/huggingface/optimum-habana) from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it really simple to use on a HPU device with a simple “import” from that library. You will be able to benefit from Gaudi’s performances and run LDM3D out of the box.
-[After installing the package](https://github.com/huggingface/optimum-habana#install), here is how to run inference: </p>
+LDM3D is also implemented in the <a href="https://github.com/huggingface/optimum-habana">optimum-habana library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it really simple to use on a HPU device with a simple “import” from that library. You will be able to benefit from Gaudi’s performances and run LDM3D out of the box.
+<a href="https://github.com/huggingface/optimum-habana#install">After installing the package</a>, here is how to run inference: </p>
           <code>
 
             
             <pre>
               <script type="application/python">
-                  <![CDATA[
                   from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
             from optimum.habana.utils import set _seed
             model_name = "Intel/ldm3d-4c"
@@ -335,7 +338,7 @@ LDM3D is also implemented in the [optimum-habana library](https://github.com/hug
                output_type="pil",
               negative_prompt=None)
             output.rgb[0].save("lemon_ldm3d_rgb.jpg")
-            output.depth[0].save("lemon_ldm3d_depth.png") ]]>
+            output.depth[0].save("lemon_ldm3d_depth.png")
           </script>
       </pre></code>
   </div>
