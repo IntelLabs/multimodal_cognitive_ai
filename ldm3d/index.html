@@ -316,7 +316,7 @@
               <code>
                     <pre>
                       <!-- <script type="application/python"> -->
-                    from diffusers import StableDiffusionLDM3DPipeline
+                  from diffusers import StableDiffusionLDM3DPipeline
                   model_name = "Intel/ldm3d-4c"
                   pipe = StableDiffusionLDM3DPipeline.from_pretrained(model_name)
                   pipe.to("cuda")
@@ -334,7 +334,7 @@
   
           <code>
                     <pre>
-                    from PIL import Image
+                  from PIL import Image
                   from diffusers import DiffusionPipeline
     
                   #Upscale the rgb and depth to a resolution of (1024, 1024)
@@ -377,7 +377,7 @@
   
   
                       <pre>
-                            from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
+                      from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
                       from optimum.habana.utils import set _seed
                       model_name = "Intel/ldm3d-4c"
                       prompt = "A picture of some lemons on a table"
@@ -411,16 +411,16 @@
       <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
           <h2 class="title">BibTeX</h2>
-          <span style='font-style:italic;'>@misc{stan2023ldm3d,
-            title={LDM3D: Latent Diffusion Model for 3D},
-            author={Gabriela Ben Melech Stan and Diana Wofk and Scottie Fox and Alex Redden and Will Saxton and Jean Yu
-            and Estelle Aflalo and Shao-Yen Tseng and Fabio Nonato and Matthias Muller and Vasudev Lal},
-            year={2023},
-            eprint={2305.10853},
+          <pre><code>@misc{cstan2023ldm3d,
+            title={Getting it Right: Improving Spatial Consistency in Text-to-Image Models}, 
+            author={Agneet Chatterjee and Gabriela Ben Melech Stan and Estelle Aflalo and Sayak Paul and Dhruba Ghosh and Tejas Gokhale and Ludwig Schmidt and Hannaneh Hajishirzi and Vasudev Lal and Chitta Baral and Yezhou Yang},
+            year={2024},
+            eprint={2404.01197},
             archivePrefix={arXiv},
             primaryClass={cs.CV}
-            }</span>
-          <span style='font-style:italic;'>@misc{stan2023ldm3dvr,
+      }</code></pre>
+          
+          <pre><code>@misc{stan2023ldm3dvr,
             title={LDM3D-VR: Latent Diffusion Model for 3D VR},
             author={Gabriela Ben Melech Stan and Diana Wofk and Estelle Aflalo and Shao-Yen Tseng and Zhipeng Cai and
             Michael Paulitsch and Vasudev Lal},
@@ -428,8 +428,7 @@
             eprint={2311.03226},
             archivePrefix={arXiv},
             primaryClass={cs.CV}
-            }</span>
-          <pre><code></code></pre>
+            }</code></pre>
         </div>
       </section>
     </div>
