@@ -71,7 +71,7 @@
               <span class="author-block">
                 <a href="" target="_blank">Will Saxton</a><sup>2</sup>,</span>
               <span class="author-block">
-                <a href="https://paperswithcode.com/search?q=author%3AJean+Yu" target="_blank">Jean
+                <a href="https://www.linkedin.com/in/jean-yu/" target="_blank">Jean
                   Yu</a><sup>3</sup>,</span>
               <span class="author-block"></span>
               <a href="https://www.semanticscholar.org/author/Estelle-Aflalo/1816753600" target="_blank">Estelle
@@ -83,13 +83,19 @@
                 <a href="https://paperswithcode.com/search?q=author%3AFabio+Nonato" target="_blank">Fabio
                   Nonato</a><sup>3</sup>,</span>
               <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=AZNUIDAAAAAJ&hl=en"
+                  target="_blank">Zhipeng Cai</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.de/citations?user=Xdy_LywAAAAJ&hl=en"
+                  target="_blank">Michael Paulitsch</a><sup>1</sup>,</span>
+              <span class="author-block">
                 <a href="https://scholar.google.com/citations?hl=en&user=AeMLOMEAAAAJ&view_op=list_works&sortby=pubdate"
                   target="_blank">Matthias Muller</a><sup>1</sup>,</span>
               <span class="author-block">
                 <a href="https://scholar.google.com/citations?user=Qbu4oKwAAAAJ&hl=en" target="_blank">Vasudev
                   Lal</a><sup>1</sup>,</span>
             </div>
-
+            , ,
             <div class="is-size-5 publication-authors">
               <span class="author-block"><sup>1</sup>Intel Labs,</span>
               <span class="author-block"><sup>2</sup>Blockade Labs,</span>
@@ -149,7 +155,15 @@
                 <span>LDM3D Artifact Collection</span>
               </a>
             </span>
-
+            <span class="link-block">
+              <a href="https://huggingface.co/docs/diffusers/main/en/api/pipelines/stable_diffusion/ldm3d_diffusion" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>LDM3D Huggingface Documentation </span>
+              </a>
+            </span>
             <span class="link-block">
               <a href="https://www.youtube.com/watch?v=3hbUo-hwAs0" target="_blank"
                 class="external-link button is-normal is-rounded is-dark">
@@ -314,6 +328,47 @@
         <div class="column is-six-fifths">
           <h2 class="title is-3">How to use</h2>
           <div class="content has-text-justified">
+            <h3 class="title is-5">On Gaudi</h3>
+
+              <div class="content has-text-justified">
+                <p>
+                  On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
+                  LDM3D is also implemented in the <a
+                    href="https://github.com/huggingface/optimum-habana">optimum-habana
+                    library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it
+                  really simple to use on a HPU device with a simple “import” from that library. You will be able to
+                  benefit
+                  from Gaudi’s performances and run LDM3D out of the box.
+                  <a href="https://github.com/huggingface/optimum-habana#install">After installing the package</a>, here
+                  is
+                  how to run inference:
+                </p>
+                <code>
+
+
+                      <pre>
+                      from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
+                      from optimum.habana.utils import set _seed
+                      model_name = "Intel/ldm3d-4c"
+                      prompt = "A picture of some lemons on a table"
+                      scheduler = GaudiDDIMScheduler.from_pretrained(model_name, subfolder="scheduler")
+                      pipe = GaudiStableDiffusionLDM3DPipeline.from_pretrained( model_name,
+                        scheduler=scheduler,
+                        use_habana=True,
+                        use_hpu_graphs=True,
+                        gaudi_config="Habana/stable-diffusion")
+                      output = pipe(prompt=["High quality photo of an astronaut riding a horse in space"],
+                        num_images_per_prompt=1,
+                        batch_size=1,
+                        output_type="pil",
+                        negative_prompt=None)
+                      output.rgb[0].save("lemon_ldm3d_rgb.jpg")
+                      output.depth[0].save("lemon_ldm3d_depth.png")
+          
+                    </pre></code>
+              </div>
+          </div>
+          <div class="content has-text-justified">
             <p>
             <h3 class="title is-5">On GPU</h3>
 
@@ -362,47 +417,7 @@
           </div>
 
 
-          <div class="content has-text-justified">
-            <h3 class="title is-5">On Gaudi</h3>
 
-              <div class="content has-text-justified">
-                <p>
-                  On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
-                  LDM3D is also implemented in the <a
-                    href="https://github.com/huggingface/optimum-habana">optimum-habana
-                    library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it
-                  really simple to use on a HPU device with a simple “import” from that library. You will be able to
-                  benefit
-                  from Gaudi’s performances and run LDM3D out of the box.
-                  <a href="https://github.com/huggingface/optimum-habana#install">After installing the package</a>, here
-                  is
-                  how to run inference:
-                </p>
-                <code>
-
-
-                      <pre>
-                      from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
-                      from optimum.habana.utils import set _seed
-                      model_name = "Intel/ldm3d-4c"
-                      prompt = "A picture of some lemons on a table"
-                      scheduler = GaudiDDIMScheduler.from_pretrained(model_name, subfolder="scheduler")
-                      pipe = GaudiStableDiffusionLDM3DPipeline.from_pretrained( model_name,
-                        scheduler=scheduler,
-                        use_habana=True,
-                        use_hpu_graphs=True,
-                        gaudi_config="Habana/stable-diffusion")
-                      output = pipe(prompt=["High quality photo of an astronaut riding a horse in space"],
-                        num_images_per_prompt=1,
-                        batch_size=1,
-                        output_type="pil",
-                        negative_prompt=None)
-                      output.rgb[0].save("lemon_ldm3d_rgb.jpg")
-                      output.depth[0].save("lemon_ldm3d_depth.png")
-          
-                    </pre></code>
-              </div>
-          </div>
         </div>
       </div>
     </div>
@@ -415,11 +430,21 @@
         <div class="column is-six-fifths">
           <h2 class="title is-3">Recognitions</h2>
           <div class="content has-text-justified">
-           LDM3D has won the best paper Award of  <a href="https://3dmv2023.github.io/">CVPR 2023 Workshop for 3DMV</a> 
+           LDM3D has won the Best Paper Award of  <a href="https://3dmv2023.github.io/">CVPR 2023 Workshop for 3DMV</a> 
               <div style="display: flex; justify-content: center;">
                 <img src="static/images/ldm3d_award.png" width="600">
                 </p>
               </div>
+            LDM3D and LDM3D-VR were featured in Daily Papers <a href= "https://huggingface.co/papers?date=2023-05-19">2023-05-19</a> and <a href= "https://huggingface.co/papers?date=2023-11-07">2023-11-07</a>
+            <div class="row">
+              <div class="column">
+                <img src="static/images/ldm3d_daily_paper.png" style="width:100%">
+              </div>
+              <div class="column">
+                <img src="static/images/ldm3d_vr_daily_paper.png"  style="width:100%">
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
