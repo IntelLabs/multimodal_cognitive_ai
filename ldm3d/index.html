@@ -201,7 +201,7 @@
             <p>
               LDM3D is Intel’s Generative AI model that generates image and its depth from text prompts. From it,
               immersive 360 environments can be created. It is the first-ever custom diffusion model with large-scale
-              training done on Intel AI Supercomputing Cluster powered by Intel Xeon and Habana Gaudi accelerators.
+              training done on Intel AI Supercomputing Cluster powered by Intel Xeon and Intel® Gaudi®2 AI accelerator.
               LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth map data from a given
               text prompt, allowing users to generate RGBD images from text prompts.
               It was finetuned on a dataset constructed from a subset of the LAION-400M dataset, a large-scale
@@ -213,7 +213,7 @@
               Our models are fine-tuned from existing pretrained models on datasets containing panoramic/high-resolution
               RGB images, depth maps and captions.
 
-              In this project page, we will present these models and how to use them on Habana Gaudi and on NVIDIA GPU
+              In this project page, we will present these models and how to use them on Intel® Gaudi®2 AI accelerator and on NVIDIA GPU
               with <a href="https://github.com/huggingface/diffusers">Diffusers</a> and <a
                 href="https://github.com/huggingface/optimum">Optimum</a>.</p>
           </div>
@@ -328,14 +328,13 @@
         <div class="column is-six-fifths">
           <h2 class="title is-3">How to use</h2>
           <div class="content has-text-justified">
-            <h3 class="title is-5">On Gaudi</h3>
+            <h3 class="title is-5">On Intel® Gaudi®2 AI accelerator</h3>
 
               <div class="content has-text-justified">
                 <p>
-                  On Habana Gaudi accelerator with the Hugging Face Optimum Habana library
-                  LDM3D is also implemented in the <a
+                                    LDM3D is also implemented in the <a
                     href="https://github.com/huggingface/optimum-habana">optimum-habana
-                    library</a> from Hugging Face to use it with Habana Gaudi accelerators. Such implementation makes it
+                    library</a> from Hugging Face to use it with Intel® Gaudi®2 AI accelerator. Such implementation makes it
                   really simple to use on a HPU device with a simple “import” from that library. You will be able to
                   benefit
                   from Gaudi’s performances and run LDM3D out of the box.
