@@ -341,8 +341,6 @@
                   how to run inference:
                 </p>
                 <code>
-
-
                       <pre>
                       from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
                       from optimum.habana.utils import set _seed
@@ -361,15 +359,15 @@
                         negative_prompt=None)
                       output.rgb[0].save("lemon_ldm3d_rgb.jpg")
                       output.depth[0].save("lemon_ldm3d_depth.png")
-          
+
                     </pre></code>
               </div>
           </div>
-          <div class="content has-text-justified">
-            <p>
-            <h3 class="title is-5">On GPU</h3>
 
-              <code>
+          <div class="content has-text-justified">
+            <h3 class="title is-5">On GPU</h3>
+              <div class="content has-text-justified">
+                <code>
                     <pre>
                       <!-- <script type="application/python"> -->
                   from diffusers import StableDiffusionLDM3DPipeline
@@ -381,39 +379,45 @@
                   output.rgb[0].save("lemon_ldm3d_rgb.jpg")
                   output.depth[0].save("lemon_ldm3d_depth.png")
                               <!-- </script> -->
-                          </pre>
-                  </code>
+                    </pre>
+                </code>
+              </div>
               <div style="display: flex; justify-content: center;">
                 <img src="static/images/ldm3d_4c_results.png" width="600">
               </div>
           </div>
 
-          <code>
+          <div class="content has-text-justified">
+            <h3 class="title is-5">Upscale the RGB and Depth to a Higher Resolution</h3>
+              <div class="content has-text-justified">
+                <code>
                     <pre>
+                      <!-- <script type="application/python"> -->
                   from PIL import Image
                   from diffusers import DiffusionPipeline
-    
+
                   #Upscale the rgb and depth to a resolution of (1024, 1024)
-                  pipe_ldm3d_upscale =  DiffusionPipeline.from_pretrained("Intel/ldm3d-sr", custom_pipeline="pipeline_stable_diffusion_upscale_ldm3d")
+                  pipe_ldm3d_upscale = DiffusionPipeline.from_pretrained("Intel/ldm3d-sr", 
+                      custom_pipeline="pipeline_stable_diffusion_upscale_ldm3d")
                   pipe_ldm3d_upscale.to("cuda")
-    
+
                   low_res_img = Image.open(f"lemons_ldm3d_rgb.jpg").convert("RGB")
                   low_res_depth = Image.open(f"lemons_ldm3d_depth.png").convert("L")
-                  outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image", rgb=low_res_img, depth=low_res_depth, num_inference_steps=50, target_res=[1024, 1024])
-    
+                  outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image", 
+                      rgb=low_res_img, depth=low_res_depth, num_inference_steps=50, target_res=[1024, 1024])
+
                   upscaled_rgb, upscaled_depth =outputs.rgb[0], outputs.depth[0]
                   upscaled_rgb.save(f"upscaled_lemons_rgb.png")
                   upscaled_depth.save(f"upscaled_lemons_depth.png")
-                          </pre>
-                      </code>
-          <div style="display: flex; justify-content: center;">
-            <img src="static/images/ldm3d_sr_rgb_results.png" width="600">
+                              <!-- </script> -->
+                    </pre>
+                </code>
+              </div>
+              <div style="display: flex; justify-content: center;">
+                <img src="static/images/ldm3d_sr_rgb_results.png" width="500">
+                <img src="static/images/ldm3d_sr_depth_results.png" width="500">
+              </div>
           </div>
-          <div style="display: flex; justify-content: center;">
-            <img src="static/images/ldm3d_sr_depth_results.png" width="600">
-          </div>
-
-
 
         </div>
       </div>
