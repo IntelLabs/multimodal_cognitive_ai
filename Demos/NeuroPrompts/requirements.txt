@@ -1,0 +1,13 @@
+gradio==3.39.0
+transformers
+diffusers
+flair==0.12.2
+numpy
+tqdm
+webdataset
+pytorch_lightning
+datasets
+openai-clip
+typer
+scipy==1.10.1
+torchvision
