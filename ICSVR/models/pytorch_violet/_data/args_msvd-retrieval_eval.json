@@ -1,0 +1,17 @@
+{
+    "type": "retrieval",
+    
+    "dataset": "msvd", 
+    "task": "msvd-retrieval", 
+    
+    "size_img": 224,
+    "size_txt": 25,
+    
+    "size_epoch": 20, 
+    "size_batch": 6, 
+    "lr": 1.2e-5, 
+    "decay": 1e-3, 
+    "typ": "straight",
+    
+    "path_ckpt": "../../weights/violet/ckpt_violet_msvd-retrieval.pt"
+}
