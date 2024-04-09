@@ -1,0 +1,333 @@
+CenterCLIP:
+wget https://github.com/mzhaoshuai/CenterCLIP/releases/download/0.0.1/eclip_msvd_22.zip
+
+#######################################################################################################
+XPOOL:
+1. Download MSVD checkpoint from https://drive.google.com/file/d/1c1iV6V00hnvZPTfLdWSFV2adUNWC2-zk/view and place it in weights/xpool/
+
+2. Rename the checkpoint to msvd_xpool.pth
+
+3.  To run on MSVD single sentence dataset:
+python test.py --exp_name=MSVD --videos_dir=../../data/msvd_vid --batch_size=32 --huggingface --load_epoch=-1 --dataset_name=MSVD --testtyp=part --typ=straight --metric=t2v
+
+python test.py --exp_name=MSVD --videos_dir=../../data/msvd_vid --batch_size=32 --huggingface --load_epoch=-1 --dataset_name=MSVD --testtyp=part --typ=straight --metric=v2t
+
+4.  To run on MSVD multi-sentence dataset:
+python test.py --exp_name=MSVD --videos_dir=../../data/msvd_vid --batch_size=32 --huggingface --load_epoch=-1 --dataset_name=MSVD --typ=straight --metric=t2v
+
+python test.py --exp_name=MSVD --videos_dir=../../data/msvd_vid --batch_size=32 --huggingface --load_epoch=-1 --dataset_name=MSVD --typ=straight --metric=v2t
+
+5. Train on DIDEMO:
+python train.py --exp_name=DIDEMO --videos_dir=../../data/didemo_vid --batch_size=32 --noclip_lr=1e-5 --transformer_dropout=0.4 --huggingface --dataset_name=DIDEMO --num_frames=64 --num_epochs=5
+
+6. Test on DIDEMO:
+python test.py --exp_name=DIDEMO --videos_dir=../../data/didemo_vid --batch_size=32 --noclip_lr=1e-5 --transformer_dropout=0.4 --huggingface --dataset_name=DIDEMO --num_frames=64 --load_epoch=-1
+
+7. Test on MSRVTT-9k
+python test.py --exp_name=MSRVTT --videos_dir=../../data/msrvtt_vid --batch_size=32 --huggingface --load_epoch=-1 --dataset_name=MSRVTT --msrvtt_train_file=9k --typ=entityaction --metric=t2v
+#########################################################################################################
+EMCL-NET:
+
+1. MSVD single sentence dataset:
+
+1a. export TYPE=straight/shuffle/negation/reverse/noaction/noentity/noentitypartial
+1b. To train the model 
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --master_port 2505 --nproc_per_node=2 main_retrieval.py --do_train 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msvd_vid_clip4clip --datatype msvd --max_words 32 --max_frames 12 --video_framerate 1 --output_dir ckpt_msvd_${TYPE} --typ ${TYPE} --testtyp ${TESTTYP}
+
+1c. To test the model
+CUDA_VISIBLE_DEVICES=4,5 python -m torch.distributed.launch --master_port 2505 --nproc_per_node=2 main_retrieval.py --do_eval 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msvd_vid_clip4clip --datatype msvd --max_words 32 --max_frames 12 --video_framerate 1 --output_dir ckpt_msvd_$TYPE --typ $TYPE --testtyp part
+
+
+2. MSVD multi-sentence dataset:
+
+2a. export $TYPE=straight/shuffle/negation/reverse/noaction/noentity/noentitypartial
+2b. To train the model 
+CUDA_VISIBLE_DEVICES=4,5 python -m torch.distributed.launch --master_port 2505 --nproc_per_node=2 main_retrieval.py --do_train 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msvd_vid_clip4clip --datatype msvd --max_words 32 --max_frames 12 --video_framerate 1 --output_dir ckpt_msvd_$TYPE --typ $TYPE
+
+2c. To test the model
+CUDA_VISIBLE_DEVICES=4,5 python -m torch.distributed.launch --master_port 2505 --nproc_per_node=2 main_retrieval.py --do_eval 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msvd_vid_clip4clip --datatype msvd --max_words 32 --max_frames 12 --video_framerate 1 --output_dir ckpt_msvd_$TYPE --typ $TYPE
+
+
+3. MSRVTT
+3a. export $TYPE=straight/shuffle/negation/reverse/noaction/noentity/noentitypartial
+
+3b. To train the model 
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --master_port 2505 --nproc_per_node=2 main_retrieval.py --do_train 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msrvtt_vid_clip4clip --datatype msrvtt --max_words 32 --max_frames 12 --video_framerate 1 --output_dir ckpt_msrvtt_$TYPE --typ $TYPE
+
+3c. To test the model
+CUDA_VISIBLE_DEVICES=4,5 python -m torch.distributed.launch --master_port 2505 --nproc_per_node=2 main_retrieval.py --do_eval 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msrvtt_vid_clip4clip --datatype msrvtt --max_words 32 --max_frames 12 --video_framerate 1 --output_dir ckpt_msvd_$TYPE --typ $TYPE
+
+
+4. DIDEMO
+4a. 
+
+4b.CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --master_port 47321 --nproc_per_node=2 main_retrieval.py --do_train 1 --workers 8 --n_display 50 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 32 --batch_size_val 32 --anno_path ../../data/clip4clip_data --video_path ../../data/didemo_vid_clip4clip --datatype didemo --max_words 64 --max_frames 64 --video_framerate 1 --output_dir ckpt_didemo_straight --typ straight
+
+#######################################################################################################
+XCLIP:
+
+1a. wget -P ./modules https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt
+
+1a. Train on MSRVTT
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --master_port=1234 --nproc_per_node=2 \
+    main_xclip.py --do_train --num_thread_reader=8 \
+    --epochs=5 --batch_size=128 --n_display=50 \
+    --data_path ../../data/clip4clip_data/MSRVTT.json \
+    --features_path ../../data/msrvtt_vid \
+    --train_csv ../../data/clip4clip_data/MSRVTT_train.9k.csv \
+    --lr 1e-4 --max_words 32 --max_frames 12 --batch_size_val 32 \
+    --datatype msrvtt --expand_msrvtt_sentences \
+    --feature_framerate 1 --coef_lr 1e-3 \
+    --freeze_layer_num 0 --slice_framepos 2 \
+    --loose_type --linear_patch 2d --sim_header seqTransf \
+    --pretrained_clip_name ViT-B/32 \
+    --typ $TYPE \
+    --output_dir ckpts3/msrvtt_$TYPE \
+    --val_csv ../../data/clip4clip_data/MSRVTT_$TYPE.csv \
+    --testtyp part 2>&1 | tee -a log/msrvtt_$TYPE
+
+1a. Train on MSVD single sentence:
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --master_port=1234 --nproc_per_node=2 \
+    main_xclip.py --do_train --num_thread_reader=2 \
+    --epochs=5 --batch_size=128 --n_display=50 \
+    --data_path ../../data/clip4clip_data \
+    --features_path ../../data/msvd_vid \
+    --lr 1e-4 --max_words 32 --max_frames 12 --batch_size_val 32 \
+    --datatype msvd \
+    --feature_framerate 1 --coef_lr 1e-3 \
+    --freeze_layer_num 0 --slice_framepos 2 \
+    --loose_type --linear_patch 2d --sim_header seqTransf \
+    --pretrained_clip_name ViT-B/32 \
+    --typ ${TYPE} \
+    --output_dir ckpts3/msvd_part_${TYPE} \
+    --testtyp part 2>&1 | tee -a log/msvd_part_${TYPE}
+
+1c. Train on DIDEMO:
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --master_port=1234 --nproc_per_node=2 \
+    main_xclip.py --do_train --num_thread_reader=4 \
+    --epochs=5 --batch_size=32 --n_display=10 \
+    --data_path ../../data/clip4clip_data \
+    --features_path ../../data/didemo_vid \
+    --lr 1e-4 --max_words 64 --max_frames 64 --batch_size_val 24 \
+    --datatype didemo \
+    --feature_framerate 1 --coef_lr 1e-3 \
+    --freeze_layer_num 0  --slice_framepos 2 \
+    --loose_type --linear_patch 2d --sim_header seqTransf \
+    --pretrained_clip_name ViT-B/32 \
+    --typ straight \
+    --output_dir ckpts3/didemo_part_straight 2>&1 | tee -a log/didemo_part_straight
+
+#########################################################################################################
+CLIP4CLIP:
+
+1. MSRVTT
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --master_port=2222 --nproc_per_node=2 main_task_retrieval.py --do_train --num_thread_reader=0 --epochs=5 --batch_size=128 --n_display=50 --train_csv ../../data/clip4clip_data/MSRVTT_train.9k.csv --data_path ../../data/clip4clip_data/MSRVTT_data.json --features_path ../../data/msrvtt_vid_clip4clip --lr 1e-4 --max_words 32 --batch_size_val 16 --datatype msrvtt --expand_msrvtt_sentences  --feature_framerate 1 --coef_lr 1e-3 --freeze_layer_num 0  --slice_framepos 2 --loose_type --linear_patch 2d --sim_header meanP --pretrained_clip_name ViT-B/32 --max_frames 12 --typ $TYPE --output_dir ckpt/msrvtt_$TYPE --val_csv ../../data/clip4clip_data/MSRVTT_$TYPE.csv
+
+
+1. MSVD
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --nproc_per_node=2 --master_port=5678 \
+main_task_retrieval.py --do_train --num_thread_reader=2 \
+--epochs=5 --batch_size=128 --n_display=50 \
+--data_path ../../data/clip4clip_data \
+--features_path ../../data/msvd_vid_clip4clip \
+--lr 1e-4 --max_words 32 --max_frames 12 --batch_size_val 16 \
+--datatype msvd \
+--feature_framerate 1 --coef_lr 1e-3 \
+--freeze_layer_num 0 --slice_framepos 2 \
+--loose_type --linear_patch 2d --sim_header meanP \
+--pretrained_clip_name ViT-B/32 \
+--output_dir ckpts/msvd_part_${TYPE} \
+--typ ${TYPE} \
+--testtyp part
+
+2. DIDEMO
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --nproc_per_node=2 --master_port=43221 \
+main_task_retrieval.py --do_train --num_thread_reader=2 \
+--epochs=5 --batch_size=32 --n_display=50 \
+--data_path ../../data/clip4clip_data \
+--features_path ../../data/didemo_vid_clip4clip \
+--lr 1e-4 --max_words 64 --max_frames 64 --batch_size_val 16 \
+--datatype didemo --feature_framerate 1 --coef_lr 1e-3 \
+--freeze_layer_num 0  --slice_framepos 2 \
+--loose_type --linear_patch 2d --sim_header meanP \
+--pretrained_clip_name ViT-B/32 \
+--output_dir ckpts/didemo_straight \
+--typ straight
+
+
+######################################################################################################
+CLIP2Video:
+
+1. MSVD Part:
+CUDA_VISIBLE_DEVICES=2,3 python CLIP2Video/infer_retrieval.py \
+--num_thread_reader=2 \
+--data_path ../data/clip4clip_data/ \
+--features_path ../data/msvd_vid_frames \
+--output_dir CLIP2Video/output/msvd.txt \
+--max_words 32 \
+--max_frames 12 \
+--batch_size_val 64 \
+--datatype msvd \
+--feature_framerate 1 \
+--sim_type seqTransf \
+--checkpoint ../weights/clip2video/msvd/ \
+--do_eval \
+--model_num 2 \
+--temporal_type TDB \
+--temporal_proj sigmoid_selfA \
+--center_type TAB \
+--centerK 5 \
+--center_weight 0.5 \
+--center_proj TAB_TDB \
+--clip_path ../weights/clip2video/ViT-B-32.pt \
+--input_file MSVD_part_clip4clip_${TYPE}.pkl
+
+2. MSVD Full
+python CLIP2Video/infer_retrieval.py \
+--num_thread_reader=2 \
+--data_path ../data/clip4clip_data/ \
+--features_path ../data/msvd_vid_frames \
+--output_dir CLIP2Video/output/msvd.txt \
+--max_words 32 \
+--max_frames 12 \
+--batch_size_val 64 \
+--datatype msvd \
+--feature_framerate 1 \
+--sim_type seqTransf \
+--checkpoint ../weights/clip2video/msvd/ \
+--do_eval \
+--model_num 2 \
+--temporal_type TDB \
+--temporal_proj sigmoid_selfA \
+--center_type TAB \
+--centerK 5 \
+--center_weight 0.5 \
+--center_proj TAB_TDB \
+--clip_path ../weights/clip2video/ViT-B-32.pt \
+--input_file MSVD_clip4clip_straight.pkl
+
+3. MSRVTT
+CUDA_VISIBLE_DEVICES=2,3 python CLIP2Video/infer_retrieval.py \
+--num_thread_reader=2 \
+--data_path ../data/clip4clip_data/MSRVTT_data.json \
+--features_path ../data/msrvtt_vid_frames \
+--output_dir CLIP2Video/output/msrvtt.txt \
+--max_words 32 \
+--max_frames 12 \
+--batch_size_val 64 \
+--datatype msrvtt \
+--feature_framerate 2 \
+--sim_type seqTransf \
+--checkpoint ../weights/clip2video/msrvtt \
+--do_eval \
+--model_num 2 \
+--temporal_type TDB \
+--temporal_proj sigmoid_selfA \
+--center_type TAB \
+--centerK 5 \
+--center_weight 0.5 \
+--center_proj TAB_TDB \
+--clip_path ../weights/clip2video/ViT-B-32.pt \
+--val_csv ../data/clip4clip_data/MSRVTT_${TYPE}.csv
+
+##########################################################################################
+TS2NET:
+
+1. DIDEMO:
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --nproc_per_node=2 --master_port=5678 \
+main_task_retrieval.py --do_train --eval_in_train --num_thread_reader=6 \
+--epochs=5 --batch_size=128 --n_display=50 \
+--data_path ../../data/clip4clip_data \
+--features_path ../../data/didemo_vid_clip4clip \
+--lr 1e-4 --max_words 64 --max_frames 64 --batch_size_val 16 \
+--cross_num_hidden_layers 4 \
+--datatype didemo --feature_framerate 1 --coef_lr 1e-3 \
+--freeze_layer_num 0  --slice_framepos 2 \
+--loose_type --linear_patch 2d --sim_header seqTransf \
+--pretrained_clip_name ViT-B/32 \
+--output_dir ckpts/didemo_${TYP} \
+--typ ${TYP}
+
+2. MSRVTT
+CUDA_VISIBLE_DEVICES=0,1,6,7 python -m torch.distributed.launch --nproc_per_node=4 --master_port 1111 \
+main_task_retrieval.py --do_train --eval_in_train --num_thread_reader=2 \
+--epochs=5 --batch_size=128 --n_display=50 \
+--train_csv ../../data/clip4clip_data/MSRVTT_train.9k.csv \
+--data_path ../../data/clip4clip_data/MSRVTT_data.json \
+--features_path ../../data/msrvtt_vid_clip4clip \
+--cross_num_hidden_layers 4 \
+--lr 1e-4 --max_words 32 --max_frames 12 --batch_size_val 8 \
+--datatype msrvtt --expand_msrvtt_sentences  \
+--feature_framerate 1 --coef_lr 1e-3 \
+--freeze_layer_num 0  --slice_framepos 2 \
+--loose_type --linear_patch 2d --sim_header seqTransf \
+--pretrained_clip_name ViT-B/32 \
+--typ $TYPE
+--val_csv ../../data/clip4clip_data/MSRVTT_${TYPE}.csv \
+--output_dir ckpts/msrvtt_$TYPE
+
+3. MSVD
+
+export TYPE=straight
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 --master_port=5678 \
+main_task_retrieval.py --do_train --eval_in_train --num_thread_reader=4 \
+--epochs=5 --batch_size=128 --n_display=50 \
+--data_path ../../data/clip4clip_data \
+--features_path ../../data/msvd_vid_clip4clip \
+--lr 1e-4 --max_words 32 --max_frames 12 --batch_size_val 16 \
+--datatype msvd \
+--feature_framerate 1 --coef_lr 1e-3 \
+--freeze_layer_num 0 --slice_framepos 2 \
+--loose_type --linear_patch 2d --sim_header seqTransf \
+--pretrained_clip_name ViT-B/32 \
+--output_dir ckpts/msvd_part_${TYPE} \
+--typ ${TYPE} \
+--testtyp part
+######################################################################################################
+VIOLET:
+
+1. Extract MSRVTT video features using
+python extract_video-frame.py --path=msrvtt --sample=5 # output: msrvtt.pkl
+
+2. Extract DIDEMO video features using
+python extract_video-frame.py --path=didemo --sample=5 # output: didemo.pkl
+
+3. Download checkpoints ckpt_video-swin.pt, ckpt_violet_msrvtt-retrieval.pt and ckpt_violet_didemo-retrieval.pt from https://drive.google.com/drive/u/0/folders/1au5q_pKxVZ8D-2N_2flVsGwlthpFtYRo
+
+
+4. Run inference on MSRVTT dataset
+export TYPE=straight/shuffle/negation/reverse/noaction/noentity/noentitypartial
+CUDA_VISIBLE_DEVICES='0,1,2,3' python eval_retrieval.py _data/args_msrvtt-retrieval.json $TYPE
+
+5. Run inference on DIDEMO dataset
+export TYPE=straight/shuffle/negation/reverse/noaction/noentity/noentitypartial
+CUDA_VISIBLE_DEVICES='0,1,2,3' python eval_retrieval.py _data/args_didemo-retrieval.json $TYPE
+
+#############################################################################################
+DRL:
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --master_port=44551 --nproc_per_node=2 main.py --do_train 1 --workers 8 --n_display 10 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 32 --batch_size_val 32 --anno_path ../../data/clip4clip_data --video_path ../../data/didemo_vid_clip4clip --datatype didemo --max_words 64 --max_frames 64 --video_framerate 1 --base_encoder ViT-B/32 --agg_module seqTransf --interaction wti --wti_arch 2 --cdcr 3 --cdcr_alpha1 0.11 --cdcr_alpha2 0.0 --cdcr_lambda 0.001 --output_dir ckpts/didemo_straight --typ straight
+
+
+##############################################################################################
+DiSoCA:
+
+1a. Train on DIDEMO:
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --master_port 2222 --nproc_per_node=2 main_retrieval.py --do_train 1 --workers 8 --n_display 50 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 32 --batch_size_val 32 --anno_path ../../data/clip4clip_data --video_path ../../data/didemo_vid_clip4clip --datatype didemo --max_words 64 --max_frames 64 --video_framerate 1 --center 8 --temp 3 --alpha 0.01 --beta 0.005 --output_dir ckpt_didemo_entityaction --typ entityaction
+
+1b. Train on MSRVTT
+CUDA_VISIBLE_DEVICES=6,7 python -m torch.distributed.launch --master_port 2502 --nproc_per_node=2 main_retrieval.py --do_train 1 --workers 8 --n_display 50 --epochs 5 --lr 1e-4 --coef_lr 1e-3 --batch_size 128 --batch_size_val 128 --anno_path ../../data/clip4clip_data --video_path ../../data/msrvtt_vid_clip4clip --datatype msrvtt --max_words 32 --max_frames 12 --video_framerate 1 --center 8 --temp 3 --alpha 0.01 --beta 0.005 --typ $TYPE --output_dir ckpt_msrvtt_$TYPE
+
+###########################################################################################
+MVM
+
+1. gdown 1lKZJpJ1CEMoKM_vECv3vnamEQGp1LY5X --output ../../data/
+2. gdown 1n_N6WMt9spgvJ__YL-w8GN-6T8l8ZNKC --output ../../data/
+3. gdown 13FzqcGkO8SMyb8FynNAo9biBRPqQtvls --output ../../data/
+4. gdown 14GSlEesxn9RymhNYsrongaHSvyg__rYW --output ../../data/
+5. gdown 11-a-jxM2KRqIKMbzup_Z8j8jBoi3WD0p --output ../../data/
+
+6. Evaluate on MSRVTT
+6a. export TYP=straight
+6b. CUDA_VISIBLE_DEVICES=0,1,2,3 python eval_retrieval_tsv.py --config _args/args_msrvtt-retrieval_eval.json --typ $TYP
+
+https://drive.google.com/file/d/1KgC1rjXzjUVQWKpRT5-bhUDLUGAuoJgl/view?usp=sharing
