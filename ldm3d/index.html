@@ -43,6 +43,8 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.23.0/gradio.js"></script>
+
 </head>
 
 <body>
@@ -296,14 +298,20 @@
                 <gradio-app src="https://intel-ldm3d.hf.space"></gradio-app>
               </div>
           </div>
+
           <div class="content has-text-justified"></div>
           <h3 class="title is-5">DepthFusion application</h3>
             We developed an application called DepthFusion, which uses the image-to-image pipeline of LDM3D to
             create immersive and interactive 360-degree-view experiences using TouchDesigner. This technology has
             the potential to transform a wide range of industries, from entertainment and gaming to architecture and
             design.
+            <style>
+              .gif {
+                  height: 500px; /* Adjust the height as needed */
+              }
+          </style>
             <div style="display: flex; justify-content: center;">
-              <img  src="static/gifs/Intel Introduces 3D Generative AI Model_new.gif" alt="youtube gifs" style="height: 415;">
+              <img  src="static/gifs/Intel Introduces 3D Generative AI Model_new.gif" alt="youtube gifs" class="gif" height="500">
             </div>
 
             <div class="content has-text-justified"></div>
