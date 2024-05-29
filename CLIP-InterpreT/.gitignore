@@ -1,0 +1,12 @@
+*.code-workspace
+*.png
+prompt_engineering/
+ldm3d-gradio/
+*.pkl
+*.out
+src/attention_weights/*.pkl
+src/.ipynb_checkpoints
+src/clip_prs/output_dir/*.npy
+src/ILSVRC2012_img_val.tar
+*__pycache__/
+*.py[cod]
