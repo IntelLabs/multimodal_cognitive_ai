@@ -12,7 +12,7 @@ This repository contains the code for CVPR 2024 demo [CLIP-InterpreT: An interpr
 1. Clone this repository and navigate to CLIP-InterpreT folder
 ```
 git clone https://github.com/intel-sandbox/CLIP-InterpreT/
-cd CLIP-InterpreT
+cd CLIP-InterpreT/src
 ```
 2. Install required packages
 ```
