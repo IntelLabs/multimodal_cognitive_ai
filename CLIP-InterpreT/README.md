@@ -12,7 +12,7 @@ This repository contains the code for CVPR 2024 demo [CLIP-InterpreT: An interpr
 1. Clone this repository and navigate to CLIP-InterpreT folder
 ```
 git clone https://github.com/intel-sandbox/CLIP-InterpreT/
-cd CLIP-InterpreT/src
+cd CLIP-InterpreT
 ```
 2. Install required packages
 ```
@@ -23,6 +23,7 @@ pip install -r requirements.txt
 ## Step-1
 We need to compute image representations of last 4 years of the CLIP model. You need to do this just once. To do so run:
 ```
+cd src
 python get_image_rep.py --modelname ViT-B-16_openai --imagepath data/ --batchsize 1
 ```
 For our experiments we used images of [ImageNet validation data](https://www.image-net.org/). You can use any other bigger dataset to get even more fine-grained results. We used six CLIP models:
@@ -37,5 +38,6 @@ For our experiments we used images of [ImageNet validation data](https://www.ima
 ## Step-2
 To run the app:
 ```
+cd src
 python main.py
 ```
