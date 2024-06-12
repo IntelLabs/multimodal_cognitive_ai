@@ -1,0 +1,19 @@
+{
+    "train_batch_size": "auto",
+    "train_micro_batch_size_per_gpu": "auto",
+    "steps_per_print": 10,
+    "gradient_accumulation_steps": "auto",
+    "zero_optimization": {
+        "stage": 2,
+        "overlap_comm": false,
+        "contiguous_gradients": true,
+        "reduce_scatter": false,
+        "sub_group_size": 1e9
+    },
+    "bf16": {
+        "enabled": true
+    },
+    "fp16": {
+        "enabled": false
+    }
+}

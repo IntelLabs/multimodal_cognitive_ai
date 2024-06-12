@@ -1,0 +1,6 @@
+{
+  "use_torch_autocast": false,
+  "hmp_is_verbose": false,
+  "use_fused_adam": true,
+  "use_fused_clip_norm": true
+}
