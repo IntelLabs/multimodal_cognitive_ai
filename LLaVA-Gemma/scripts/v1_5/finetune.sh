@@ -7,7 +7,7 @@
 #SBATCH --partition=g48
 #SBATCH --gres=gpu:8
 #SBATCH --constraint=ampere
-#SBATCH --cpus-per-task=24
+#SBATCH --cpus-per-task=112
 
 # Gemma Fine-tuning dev script
 # Musashi Hinck, Intel Labs
@@ -45,13 +45,13 @@ deepspeed llava/train/train_mem.py \
     --gradient_accumulation_steps 8 \
     --evaluation_strategy "no" \
     --save_strategy "steps" \
-    --save_steps 5 \
+    --save_steps 500 \
     --save_total_limit 1 \
     --learning_rate 2e-5 \
     --weight_decay 0. \
     --warmup_ratio 0.03 \
     --lr_scheduler_type "cosine" \
-    --logging_steps 1 \
+    --logging_steps 10 \
     --tf32 True \
     --model_max_length 2048 \
     --gradient_checkpointing True \
