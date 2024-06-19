@@ -16,4 +16,4 @@ einops-exts
 timm
 deepspeed@git+https://github.com/HabanaAI/deepspeed.git@1.11.0
 peft
-transformers@git+https://github.com/huggingface/transformers@49204c1d37b807def930fe45f5f84abc370a7200
+transformers@git+https://github.com/huggingface/transformers.git@49204c1d37b807def930fe45f5f84abc370a7200
