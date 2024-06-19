@@ -17,4 +17,4 @@ timm
 deepspeed@git+https://github.com/HabanaAI/deepspeed.git@1.11.0
 optimum-habana@git+https://github.com/huggingface/optimum-habana.git@a2b63ce02939d0dbb90cbca123b7acef27b347ae
 peft
-transformers@git+https://github.com/huggingface/transformers@49204c1d37b807def930fe45f5f84abc370a7200
+transformers@git+https://github.com/huggingface/transformers.git@49204c1d37b807def930fe45f5f84abc370a7200
