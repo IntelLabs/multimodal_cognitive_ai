@@ -1,0 +1,25 @@
+<figure class="figure">
+  <a
+    {% if include.link %}
+      href="{{ include.link | relative_url }}"
+    {% endif %}
+    class="figure-image"
+    aria-label="{{ include.caption | default: "figure link" }}"
+  >
+    <img
+      src="{{ include.image | relative_url }}"
+      style="
+        width: {{ include.width | default: "auto" }};
+        max-height: {{ include.height | default: "unset" }};
+      "
+      alt="{{ include.caption | default: "figure image" }}"
+      loading="lazy"
+      {% include fallback.html %}
+    >
+  </a>
+  {% if include.caption %}
+    <figcaption class="figure-caption">
+      {{ include.caption | markdownify | remove: "<p>" | remove: "</p>" }}
+    </figcaption>
+  {% endif %}
+</figure>

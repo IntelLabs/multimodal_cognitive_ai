@@ -1,0 +1,38 @@
+---
+---
+
+pre,
+code,
+pre *,
+code * {
+  font-family: var(--code);
+}
+
+// inline code
+code.highlighter-rouge {
+  padding: 2px 6px;
+  background: var(--light-gray);
+  border-radius: var(--rounded);
+}
+
+// code block
+div.highlighter-rouge {
+  width: 100%;
+  margin: 40px 0;
+  border-radius: var(--rounded);
+  overflow-x: auto;
+  overflow-y: auto;
+  text-align: left;
+
+  div.highlight {
+    display: contents;
+
+    pre.highlight {
+      width: fit-content;
+      min-width: 100%;
+      margin: 0;
+      padding: 20px;
+      color: var(--white);
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<div class="post-info">
+  {% if include.author %}
+    {% assign member = site.members
+      | where_exp: "member", "member.slug == include.author"
+      | first
+    %}
+    {% if member %}
+      {% include portrait.html lookup=include.author style="tiny" %}
+    {% else %}
+      <span data-tooltip="Author">
+        {% include icon.html icon="fa-solid fa-feather-pointed" %}
+        <span>{{ include.author }}</span>
+      </span>
+    {% endif %}
+  {% endif %}
+
+  {% assign published = include.published | date: "%B %d, %Y" %}
+  {% assign updated = include.updated | date: "%B %d, %Y" %}
+
+  {% if published %}
+    <span data-tooltip="Originally published on">
+      {% include icon.html icon="fa-regular fa-calendar" %}
+      <span>{{ published }}</span>
+    </span>
+  {% endif %}
+
+  {% if updated and updated != "" and updated != published %}
+    <span data-tooltip="Last updated on">
+      {% include icon.html icon="fa-solid fa-clock-rotate-left" %}
+      <span>{{ updated }}</span>
+    </span>
+  {% endif %}
+</div>
+
+{% if include.tags %}
+  {% include tags.html tags=include.tags link="blog" %}
+{% endif %}

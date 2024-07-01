@@ -1,0 +1,15 @@
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+debug.log
+__pycache__
+.cache
+!cache.db
+.DS_STORE
+.env*
+package.json
+package-lock.json
+yarn.lock
+node_modules

@@ -1,0 +1,69 @@
+name: update-url
+run-name: update site after url change
+
+on:
+  # run when called from another workflow
+  workflow_call:
+    outputs:
+      changed:
+        value: ${{ jobs.update-url.outputs.changed }}
+
+  # run if user manually requests it
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-url:
+    runs-on: ubuntu-latest
+
+    steps:
+      # for debugging
+      - uses: crazy-max/ghaction-dump-context@v2
+
+      - name: Get Pages url
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Checkout branch contents
+        uses: actions/checkout@v4
+
+      # for debugging
+      - if: runner.debug == '1'
+        uses: mxschmitt/action-tmate@v3
+
+      # update link to site in readme
+      - name: Update readme
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { readFileSync, writeFileSync } = require("fs");
+            const file = "README.md";
+            let contents = readFileSync(file).toString();
+            const find = /\*\*\[.*\]\(.*\)\*\*/;
+            const host = "${{ steps.pages.outputs.host }}";
+            const path = "${{ steps.pages.outputs.base_path }}";
+            const url = "${{ steps.pages.outputs.base_url }}";
+            const replace = `**[${host}${path}](${url})**`;
+            if (contents.match(find))
+              contents = contents.replace(find, replace);
+            else
+              contents = `Visit ${replace} 🚀\n\n` + contents;
+            writeFileSync(file, contents);
+
+      - name: Check if readme changed
+        id: changed
+        uses: tj-actions/verify-changed-files@v18
+        with:
+          files: |
+            README.md
+
+      - name: Commit changed files
+        if: steps.changed.outputs.files_changed == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update url"
+
+    outputs:
+      changed: ${{ steps.changed.outputs.files_changed }}
