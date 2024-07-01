@@ -1,0 +1,157 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    Ascii85 (1.1.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
+    afm (0.2.2)
+    async (2.8.1)
+      console (~> 1.10)
+      fiber-annotation
+      io-event (~> 1.1)
+      timers (~> 4.1)
+    colorator (1.1.0)
+    concurrent-ruby (1.2.2)
+    console (1.23.4)
+      fiber-annotation
+      fiber-local
+      json
+    em-websocket (0.5.3)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    eventmachine (1.2.7)
+    ffi (1.15.5)
+    ffi (1.15.5-x64-mingw-ucrt)
+    fiber-annotation (0.2.0)
+    fiber-local (1.0.0)
+    forwardable-extended (2.6.0)
+    gemoji (3.0.1)
+    google-protobuf (3.22.0)
+    google-protobuf (3.22.0-arm64-darwin)
+    google-protobuf (3.22.0-x64-mingw-ucrt)
+    hashery (2.1.2)
+    html-proofer (5.0.8)
+      addressable (~> 2.3)
+      async (~> 2.1)
+      nokogiri (~> 1.13)
+      pdf-reader (~> 2.11)
+      rainbow (~> 3.0)
+      typhoeus (~> 1.3)
+      yell (~> 2.0)
+      zeitwerk (~> 2.5)
+    http_parser.rb (0.8.0)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
+    io-event (1.4.4)
+    jekyll (4.3.2)
+      addressable (~> 2.4)
+      colorator (~> 1.0)
+      em-websocket (~> 0.5)
+      i18n (~> 1.0)
+      jekyll-sass-converter (>= 2.0, < 4.0)
+      jekyll-watch (~> 2.0)
+      kramdown (~> 2.3, >= 2.3.1)
+      kramdown-parser-gfm (~> 1.0)
+      liquid (~> 4.0)
+      mercenary (>= 0.3.6, < 0.5)
+      pathutil (~> 0.9)
+      rouge (>= 3.0, < 5.0)
+      safe_yaml (~> 1.0)
+      terminal-table (>= 1.8, < 4.0)
+      webrick (~> 1.7)
+    jekyll-feed (0.17.0)
+      jekyll (>= 3.7, < 5.0)
+    jekyll-last-modified-at (1.3.0)
+      jekyll (>= 3.7, < 5.0)
+      posix-spawn (~> 0.3.9)
+    jekyll-redirect-from (0.16.0)
+      jekyll (>= 3.3, < 5.0)
+    jekyll-sass-converter (3.0.0)
+      sass-embedded (~> 1.54)
+    jekyll-sitemap (1.4.0)
+      jekyll (>= 3.7, < 5.0)
+    jekyll-spaceship (0.10.2)
+      gemoji (~> 3.0)
+      jekyll (>= 3.6, < 5.0)
+      nokogiri (~> 1.6)
+      rainbow (~> 3.0)
+    jekyll-watch (2.2.1)
+      listen (~> 3.0)
+    json (2.7.1)
+    kramdown (2.4.0)
+      rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
+    liquid (4.0.4)
+    listen (3.8.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    mercenary (0.4.0)
+    mini_portile2 (2.8.1)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    nokogiri (1.13.10-arm64-darwin)
+      racc (~> 1.4)
+    pathutil (0.16.2)
+      forwardable-extended (~> 2.6)
+    pdf-reader (2.12.0)
+      Ascii85 (~> 1.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
+    posix-spawn (0.3.15)
+    public_suffix (5.0.1)
+    racc (1.6.2)
+    rainbow (3.1.1)
+    rake (13.1.0)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    rexml (3.2.5)
+    rouge (3.30.0)
+    ruby-rc4 (0.1.5)
+    safe_yaml (1.0.5)
+    sass-embedded (1.58.3)
+      google-protobuf (~> 3.21)
+      rake (>= 10.0.0)
+    sass-embedded (1.58.3-arm64-darwin)
+      google-protobuf (~> 3.21)
+    sass-embedded (1.58.3-x64-mingw-ucrt)
+      google-protobuf (~> 3.21)
+    terminal-table (3.0.2)
+      unicode-display_width (>= 1.1.1, < 3)
+    timers (4.3.5)
+    ttfunk (1.7.0)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
+    unicode-display_width (2.4.2)
+    webrick (1.8.1)
+    yell (2.2.2)
+    zeitwerk (2.6.13)
+
+PLATFORMS
+  aarch64-linux
+  linux
+  universal-darwin-21
+  universal-darwin-22
+  x64-mingw-ucrt
+  x64-mingw32
+  x64-unknown
+  x86_64-linux
+
+DEPENDENCIES
+  html-proofer (~> 5.0)
+  jekyll (~> 4.3)
+  jekyll-feed
+  jekyll-last-modified-at
+  jekyll-redirect-from
+  jekyll-sitemap
+  jekyll-spaceship
+  webrick (~> 1.7)
+
+BUNDLED WITH
+   2.5.6
