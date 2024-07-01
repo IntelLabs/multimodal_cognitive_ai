@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="LDM3D">
+  <meta property="og:title" content="LDM3D" />
+  <meta property="og:description" content="LDM3D: Latent Diffusion Model for 3D" />
+  <meta property="og:url" content="https://intellabs.github.io/multimodal_cognitive_ai/ldm3d/" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="LDM3D">
+  <meta name="twitter:description" content="LDM3D: Latent Diffusion Model for 3D">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/static/images/comparisons_interface.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Diffusion, VR, 3D, 360-view">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>LDM3D </title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.23.0/gradio.js"></script>
+
+</head>
+
+<body>
+
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">-->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">LDM3D: Latent Diffusion Model for 3D</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://dblp.org/pid/327/6836.html" target="_blank">Gabriela Ben Melech Stan</a><sup>1,
+                  ‡</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=-GYVcpQAAAAJ&hl=en" target="_blank">Diana
+                  Wofk</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/scottie-fox-49742b26b" target="_blank">Scottie
+                  Fox</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=1ZJwVkwAAAAJ&hl=en" target="_blank">Alex
+                  Redden</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="" target="_blank">Will Saxton</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/jean-yu/" target="_blank">Jean
+                  Yu</a><sup>3</sup>,</span>
+              <span class="author-block"></span>
+              <a href="https://www.semanticscholar.org/author/Estelle-Aflalo/1816753600" target="_blank">Estelle
+                Aflalo</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=IV0Nu40AAAAJ&hl=en" target="_blank">Shao-Yen
+                  Tseng</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://paperswithcode.com/search?q=author%3AFabio+Nonato" target="_blank">Fabio
+                  Nonato</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=AZNUIDAAAAAJ&hl=en"
+                  target="_blank">Zhipeng Cai</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.de/citations?user=Xdy_LywAAAAJ&hl=en"
+                  target="_blank">Michael Paulitsch</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=AeMLOMEAAAAJ&view_op=list_works&sortby=pubdate"
+                  target="_blank">Matthias Muller</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Qbu4oKwAAAAJ&hl=en" target="_blank">Vasudev
+                  Lal</a><sup>1</sup></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Intel Labs,</span>
+              <span class="author-block"><sup>2</sup>Blockade Labs,</span>
+              <span class="author-block"><sup>3</sup>Intel,</span>
+              <span class="eql-cntrb"><small><br><sup>‡</sup><a
+                    href="mailto:gabriela.ben.melech.stan@intel.com">Corresponding author.</a></small></span>
+            </div>
+
+
+            <!--                  &lt;!&ndash; Github link &ndash;&gt;-->
+            <!--                  <span class="link-block">-->
+            <!--                    <a href="https://github.com/YOUR REPO HERE" target="_blank"-->
+            <!--                    class="external-link button is-normal is-rounded is-dark">-->
+            <!--                    <span class="icon">-->
+            <!--                      <i class="fab fa-github"></i>-->
+            <!--                    </span>-->
+            <!--                    <span>Code</span>-->
+            <!--                  </a>-->
+            <!--                </span>-->
+
+            <!-- ArXiv abstract Link -->
+            <span class="link-block">
+              <a href="https://arxiv.org/pdf/2305.10853.pdf" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>LDM3D Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://arxiv.org/pdf/2311.03226.pdf" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>LDM3D-VR Paper</span>
+              </a>
+            </span>
+            <!-- Demo Link -->
+            <span class="link-block">
+              <a href="https://huggingface.co/spaces/Intel/ldm3d" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <p style="font-size:20px">&#x1F917;</p>
+                </span>
+                <span>Demo</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="https://huggingface.co/collections/Intel/ldm3d-660c030045d1b507a7275352" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <p style="font-size:20px">&#x1F917;</p>
+                </span>
+                <span>LDM3D Artifact Collection</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://huggingface.co/docs/diffusers/main/en/api/pipelines/stable_diffusion/ldm3d_diffusion" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <p style="font-size:20px">&#x1F917;</p>
+                </span>
+                <span>Huggingface Documentation</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://www.youtube.com/watch?v=3hbUo-hwAs0" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-video"></i>
+                </span>
+                <span>Youtube interactive video</span>
+              </a>
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h4 class="subtitle has-text-centered">
+          Latent Diffusion for 3D (LDM3D) generates both image and depth map data from a given text prompt, allowing
+          users to generate RGBD images from text prompts.
+        </h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color:#efeff081">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+              LDM3D is Intel’s Generative AI model that generates image and its depth from text prompts. From it,
+              immersive 360 environments can be created. It is the first-ever custom diffusion model with large-scale
+              training done on Intel AI Supercomputing Cluster powered by Intel Xeon and Intel® Gaudi®2 AI accelerator.
+              LDM3D leverages Stable Diffusion 1.5 training and generates both image and depth map data from a given
+              text prompt, allowing users to generate RGBD images from text prompts.
+              It was finetuned on a dataset constructed from a subset of the LAION-400M dataset, a large-scale
+              image-caption dataset that contains over 400 million image-caption pairs.
+
+              We also developed an extension to LDM3D: LDM3D-VR, a suite of diffusion models targeting virtual reality
+              development that includes LDM3D-pano and LDM3D-SR. These models enable the generation of panoramic RGBD
+              based on textual prompts and the upscaling of low-resolution inputs to high-resolution RGBD, respectively.
+              Our models are fine-tuned from existing pretrained models on datasets containing panoramic/high-resolution
+              RGB images, depth maps and captions.
+
+              In this project page, we will present these models and how to use them on Intel® Gaudi®2 AI accelerator and on NVIDIA GPU
+              with <a href="https://github.com/huggingface/diffusers">Diffusers</a> and <a
+                href="https://github.com/huggingface/optimum">Optimum</a>.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- Interface -->
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">LDM3D</h2>
+          <div class="content has-text-justified">
+            <p>
+              In order to capture both RGB and depth representations in the latent space, we modified the
+              KL-autoencoder. The KL-encoder now takes as input a RGBD image to create a latent representation of both
+              RGB and depth. After having added noise to this latent, the U-Net will play its role of iteratively
+              denoising it.
+              A frozen CLIP-text model is used to encode the text prompt and the embedding created from it is then
+              integrated into the U-Net through cross-attention
+              Finally, the modified KL-decoder decodes the denoised latent representation back to the pixel space as a
+              RGBD output = (RGB, 16-bit grayscale depth map)</p>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <img src="https://huggingface.co/Intel/ldm3d/resolve/main/model_overview.png" width="600">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">LDM3D-VR</h2>
+          <div class="content has-text-justified">
+            <p>
+              LDM3D-VR is a suite of diffusion models targeting virtual reality development. These models enable the
+              generation of panoramic RGBD based on textual prompts and the upscaling of low-resolution inputs to
+              high-resolution RGBD. The models included in LDM3D-VR are:
+            <ul>
+              <li> <a href="https://huggingface.co/Intel/ldm3d-pano">ldm3d-pano</a> further finetunes the previous
+                [ldm3d-4c](https://huggingface.co/Intel/ldm3d-4c) checkpoint on panoramic image datasets to generate
+                better panoramas.</li>
+              <li><a href="https://huggingface.co/Intel/ldm3d-sr">ldm3d-sr</a> performs x4 upscaling and recovers
+                high-resolution RGB and depth maps from low-resolution panorama inputs.</li>
+            </ul>
+            Training and inference pipeline are shown in the image below:
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <img src="https://huggingface.co/Intel/ldm3d-sr/resolve/main/ldm3d-sr-overview.png" width="600">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Application</h2>
+          <div class="content has-text-justified">
+            <h3 class="title is-5">Huggingface demo</h3>
+              A Hugging Face Space has been created to visualize panoramic images in a 360 view application using the
+              LDM3D-pano checkpoint.
+              <div class="container is-centered has-text-centered">
+                <gradio-app src="https://intel-ldm3d.hf.space"></gradio-app>
+              </div>
+          </div>
+
+          <div class="content has-text-justified"></div>
+          <h3 class="title is-5">DepthFusion application</h3>
+            We developed an application called DepthFusion, which uses the image-to-image pipeline of LDM3D to
+            create immersive and interactive 360-degree-view experiences using TouchDesigner. This technology has
+            the potential to transform a wide range of industries, from entertainment and gaming to architecture and
+            design.
+            <style>
+              .gif {
+                  height: 500px; /* Adjust the height as needed */
+              }
+          </style>
+            <div style="display: flex; justify-content: center;">
+              <img  src="static/gifs/Intel Introduces 3D Generative AI Model_new.gif" alt="youtube gifs" class="gif" height="500">
+            </div>
+
+            <div class="content has-text-justified"></div>
+            <h3 class="title is-5">Immersive experience</h3>
+              If accessed by computer, try and move the mouse around to get a 3D view. If accessed by phone, move
+              around the space with the phone to experience the VR even more.
+              <div style="display: flex; justify-content: center;"><iframe width="520" height="415" 
+                  src="https://www.youtube.com/embed/3hbUo-hwAs0">
+                </iframe>
+              </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">How to use</h2>
+          <div class="content has-text-justified">
+            <h3 class="title is-5">On Intel® Gaudi®2 AI accelerator</h3>
+
+              <div class="content has-text-justified">
+                <p>
+                                    LDM3D is also implemented in the <a
+                    href="https://github.com/huggingface/optimum-habana">optimum-habana
+                    library</a> from Hugging Face to use it with Intel® Gaudi®2 AI accelerator. Such implementation makes it
+                  really simple to use on a HPU device with a simple “import” from that library. You will be able to
+                  benefit
+                  from Gaudi’s performances and run LDM3D out of the box.
+                  <a href="https://github.com/huggingface/optimum-habana#install">After installing the package</a>, here
+                  is
+                  how to run inference:
+                </p>
+                <code>
+                      <pre>
+                      from optimum.habana.diffusers import GaudiDDIMScheduler, GaudiStableDiffusionLDM3DPipeline
+                      from optimum.habana.utils import set _seed
+                      model_name = "Intel/ldm3d-4c"
+                      prompt = "A picture of some lemons on a table"
+                      scheduler = GaudiDDIMScheduler.from_pretrained(model_name, subfolder="scheduler")
+                      pipe = GaudiStableDiffusionLDM3DPipeline.from_pretrained( model_name,
+                        scheduler=scheduler,
+                        use_habana=True,
+                        use_hpu_graphs=True,
+                        gaudi_config="Habana/stable-diffusion")
+                      output = pipe(prompt=["High quality photo of an astronaut riding a horse in space"],
+                        num_images_per_prompt=1,
+                        batch_size=1,
+                        output_type="pil",
+                        negative_prompt=None)
+                      output.rgb[0].save("lemon_ldm3d_rgb.jpg")
+                      output.depth[0].save("lemon_ldm3d_depth.png")
+
+                    </pre></code>
+              </div>
+          </div>
+
+          <div class="content has-text-justified">
+            <h3 class="title is-5">On GPU</h3>
+              <div class="content has-text-justified">
+                <code>
+                    <pre>
+                      <!-- <script type="application/python"> -->
+                  from diffusers import StableDiffusionLDM3DPipeline
+                  model_name = "Intel/ldm3d-4c"
+                  pipe = StableDiffusionLDM3DPipeline.from_pretrained(model_name)
+                  pipe.to("cuda")
+                  prompt = "A picture of some lemons on a table"
+                  output = pipe( prompt,  width=1024, height=512, guidance_scale=7.0, num_inference_steps=50 )
+                  output.rgb[0].save("lemon_ldm3d_rgb.jpg")
+                  output.depth[0].save("lemon_ldm3d_depth.png")
+                              <!-- </script> -->
+                    </pre>
+                </code>
+              </div>
+              <div style="display: flex; justify-content: center;">
+                <img src="static/images/ldm3d_4c_results.png" width="600">
+              </div>
+          </div>
+
+          <div class="content has-text-justified">
+            <h3 class="title is-5">Upscale the RGB and Depth to a Higher Resolution</h3>
+              <div class="content has-text-justified">
+                <code>
+                    <pre>
+                      <!-- <script type="application/python"> -->
+                  from PIL import Image
+                  from diffusers import DiffusionPipeline
+
+                  #Upscale the rgb and depth to a resolution of (1024, 1024)
+                  pipe_ldm3d_upscale = DiffusionPipeline.from_pretrained("Intel/ldm3d-sr", 
+                      custom_pipeline="pipeline_stable_diffusion_upscale_ldm3d")
+                  pipe_ldm3d_upscale.to("cuda")
+
+                  low_res_img = Image.open(f"lemons_ldm3d_rgb.jpg").convert("RGB")
+                  low_res_depth = Image.open(f"lemons_ldm3d_depth.png").convert("L")
+                  outputs = pipe_ldm3d_upscale(prompt="high quality high resolution uhd 4k image", 
+                      rgb=low_res_img, depth=low_res_depth, num_inference_steps=50, target_res=[1024, 1024])
+
+                  upscaled_rgb, upscaled_depth =outputs.rgb[0], outputs.depth[0]
+                  upscaled_rgb.save(f"upscaled_lemons_rgb.png")
+                  upscaled_depth.save(f"upscaled_lemons_depth.png")
+                              <!-- </script> -->
+                    </pre>
+                </code>
+              </div>
+              <div style="display: flex; justify-content: center;">
+                <img src="static/images/ldm3d_sr_rgb_results.png" width="500">
+                <img src="static/images/ldm3d_sr_depth_results.png" width="500">
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Recognitions</h2>
+          <div class="content has-text-justified">
+           LDM3D has won the Best Paper Award of  <a href="https://3dmv2023.github.io/">CVPR 2023 Workshop for 3DMV</a> 
+              <div style="display: flex; justify-content: center;">
+                <img src="static/images/ldm3d_award.png" width="600">
+                </p>
+              </div>
+            LDM3D and LDM3D-VR were featured in Daily Papers <a href= "https://huggingface.co/papers?date=2023-05-19">2023-05-19</a> and <a href= "https://huggingface.co/papers?date=2023-11-07">2023-11-07</a>
+            <div class="row">
+              <div class="column">
+                <img src="static/images/ldm3d_daily_paper.png" style="width:45%">
+              </div>
+              <div class="column">
+                <img src="static/images/ldm3d_vr_daily_paper.png"  style="width:45%">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <!-- Image carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+          <div class="container">
+              <div id="results-carousel" class="carousel results-carousel">
+                  <!-- <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000007_006.png" alt="carousel1" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                          In a lush, green meadow, a <b><u>large</u></b>, colorful hot air balloon is preparing to ascend, positioned on the far <b><u>right</u></b>. On the <b><u>left</u></b>, a group of <b><u>small</u></b> rabbits, each no <b><u>bigger</u></b> than a balloon basket, curiously watches from a safe distance.
+                      </div>
+                  </div> -->
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000012_009.png" alt="carousel2" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a 360 - view of a small wooden house in the middle of a field. 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000036_025.png" alt="carousel3" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a 360 - view of a city street with a bridge 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000083_044.png" alt="carousel4" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a 360 - view of a living room with furniture and a window    
+                      </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000141_093.png" alt="carousel5" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a living room with a couch, a table and a chair                      </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000154_100.png" alt="carousel6" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                          a 360 - view of a hospital room                       </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000155_101.png" alt="carousel6" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a 360 - view of a patio area with chairs and a table 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000588_278.png" alt="carousel6" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a 360 - view of a field with a few buildings in the distance 
+                      </div>
+                  </div>
+                  <div class="card">
+                      <div class="card-image">
+                          <img src="static/images/pano/000000701_306.png" alt="carousel6" />
+                      </div>
+                      <div class="card-content has-text-centered">
+                        a 360 - fisheye view of a field and a river 
+                                            </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- End image carousel -->
+
+
+  <!--BibTex citation -->
+  <section class="hero is-small is-light has-text-justified">
+    <div class="hero-body">
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@misc{stan2023ldm3d,
+            title={LDM3D: Latent Diffusion Model for 3D}, 
+            author={Gabriela Ben Melech Stan and Diana Wofk and Scottie Fox and Alex Redden and Will Saxton and Jean Yu and Estelle Aflalo and Shao-Yen Tseng and Fabio Nonato and Matthias Muller and Vasudev Lal},
+            year={2023},
+            eprint={2305.10853},
+            archivePrefix={arXiv},
+            primaryClass={cs.CV}
+      }</code></pre>
+
+          <pre><code>@misc{stan2023ldm3dvr,
+            title={LDM3D-VR: Latent Diffusion Model for 3D VR},
+            author={Gabriela Ben Melech Stan and Diana Wofk and Estelle Aflalo and Shao-Yen Tseng and Zhipeng Cai and
+            Michael Paulitsch and Vasudev Lal},
+            year={2023},
+            eprint={2311.03226},
+            archivePrefix={arXiv},
+            primaryClass={cs.CV}
+            }</code></pre>
+        </div>
+      </section>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p style="color:gray;font-size:9.9px;">
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a>, is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+              <a href="https://www.flaticon.com/free-icons/magic" title="magic icons">Magic icons created by Freepik -
+                Flaticon</a>
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+</body>
+
+</html>

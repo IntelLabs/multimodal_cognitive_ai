@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="CLIPInterpreT">
+  <meta property="og:title" content="CLIPInterpreT"/>
+  <meta property="og:description" content="CLIP-InterpreT: An interpretability Tool for CLIP-like Models"/>
+  <meta property="og:url" content="https://shacharosn.github.io/prompt-engineering/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="CLIPInterpreT">
+  <meta name="twitter:description" content="CLIP-InterpreT: An Interpretability Tool for CLIP-like Models">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/static/images/comparisons_interface.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Vision-and-Language Benchmark, Synthetic and Compositional Images">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>CLIP-InterpreT </title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.19.0/gradio.js"></script>
+</head>
+<style>
+  body {
+    font-size:20px;
+    margin:60px auto;
+    width:auto;
+    max-width:900px;
+  }
+
+  h2 {
+			font-size: 28pt;
+      text-align: center;
+		}
+
+		h3 {
+			font-size: 20pt;
+      text-align: center;
+		}
+
+		h4 {
+			font-size: 16pt;
+		}
+
+
+  hr {
+    border:0;
+    height:1.0px;
+    background-image:linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  }
+
+  .gap-30 {
+  width:100%;
+  height:30px;
+  }
+
+  .gap-20 {
+  width:100%;
+  height:20px;
+  }
+
+  .gap-10 {
+  width:100%;
+  height:10px;
+  }
+
+  .gap-5 {
+  width:100%;
+  height:5px;
+  }
+  .paper {
+    max-width: 700px;
+  }
+  @media (max-width: 910px) {
+    .paper {
+      max-width: 500px;
+    }
+  }
+  @media (max-width: 610px) {
+    .paper {
+      max-width: 300px;
+    }
+  }
+
+</style>
+<body>
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">-->
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">CLIP-InterpreT: An interpretability Tool for CLIP-like Models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://avinashsai.github.io/" target="_blank">Avinash Madasu<sup>1</sup></a>,&nbsp;</span>
+                  <span class="author-block">
+                      <a href="https://yossigandelsman.github.io/" target="_blank">Yossi Gandelsman<sup>2</sup></a>,&nbsp;</span>
+                  <span class="author-block">
+                      <a href="https://scholar.google.com/citations?user=Qbu4oKwAAAAJ&hl=en" target="_blank">Vasudev Lal<sup>1</sup></a>,&nbsp;</span>
+                  <span class="author-block">  
+                      <a href="https://scholar.google.com/citations?user=EKh822gAAAAJ&hl=en" target="_blank">Phillip Howard<sup>1</sup></a>&nbsp;</span>
+                    </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Intel Labs<sup>1</sup>,&nbsp</span> 
+                    <span class="author-block">UC Berkeley<sup>2</sup>&nbsp</span>
+                  </div>
+
+<!--                  &lt;!&ndash; Github link &ndash;&gt;-->
+<!--                  <span class="link-block">-->
+<!--                    <a href="https://github.com/YOUR REPO HERE" target="_blank"-->
+<!--                    class="external-link button is-normal is-rounded is-dark">-->
+<!--                    <span class="icon">-->
+<!--                      <i class="fab fa-github"></i>-->
+<!--                    </span>-->
+<!--                    <span>Code</span>-->
+<!--                  </a>-->
+<!--                </span>-->
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/abs/2311.12229" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span> -->
+                </a>
+              </span>
+
+                <!-- Demo Link -->
+                <span class="link-block">
+                  <a href="http://18.217.81.42:7860/" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:20px">&#x1F917;</p>
+                  </span>
+                  <span>Demo</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="https://youtu.be/l6IVjBvVc_E?si=GvFGA7PI_I9zTYN9" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>   
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gradio layout code -->
+
+<!-- <section class="hero teaser"  style="background-color:#efeff081">
+  <div class="container is-max-desktop" id="gradio" style="width:800px; margin:0 auto;">
+    <gradio-app src="http://18.217.81.42:7860/"></gradio-app>
+  </div>
+</section> -->
+
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h3 class="title is-3 publication-title">Introduction</h3>
+
+        <p style="font-size:1.37vw;">
+          CLIP-InterpreT is an interpretability tool for exploring the inner workings of <a href="https://openai.com/research/clip">CLIP</a>-like foundational models. 
+          CLIP is one of the most popular vision-language foundational models and is heavily utilized as a base model when developing new models for tasks such as video retrieval, 
+          image generation, and visual navigation. Hence, it is critical to understand the inner workings of CLIP. To understand more
+          about the inner workings of the algorithms used in this demo, refer to the <a href="https://arxiv.org/abs/2310.05916">ICLR 2024</a> 
+          paper. This tool supports a wide-range of CLIP-like models and provides five types of interpretability analyses:
+
+        </p>
+      </div>
+    </div>
+</section>
+
+<hr>
+<section class="section" style="background-color: #efeff081">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-six-fifths">
+        <h2 class="title is-3">CLIP-InterpreT gradio app demo video</h2>
+        <div class="content has-text-justified">
+          <div style="display: flex; justify-content: center;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/l6IVjBvVc_E" title="YouTube video player"
+		    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title" id="image-property">Property-based nearest neighbors search</h3>
+
+      <p style="font-size:1.37vw;">
+        In this analysis, we show that CLIP layers and heads can be characterized  by specific properties such as colors, locations, animals, etc. 
+        We retrieve the top-4 most similar images from <a href="https://www.image-net.org/">ImageNet</a> validation dataset for a selected property. 
+        The properties have been labelled with <a href="https://chat.openai.com/">ChatGPT</a> using in-context learning. We provide 
+        text-span ouputs and manually labelled properties as in-context examples and ask ChatGPT to identify the properties
+        for all the other layers & heads for each of the models. The properties that are common across layers and heads 
+        for each model for combined and presented.
+        Below, we show the examples for each of the properties. Here, the blue color corresponds to the description provided in the text input.
+      </p>
+      <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/France_location_vit-b-32-openai_combined.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-4 nearest neighbors for "location" property.</b> The model used is ViT-B-32 (OpenAI).</i>
+          <br>
+          The input image is a picture of an "Eiffle tower" in Paris, France. The top-4 images are related to the popular <b>location</b>
+          landmarks.
+        </p>
+        
+        <br>
+        <br>
+        <img width="100%" src="images/Statue_of_liberty_location_ViT-L-14-laion_combined.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-4 nearest neighbors for "location" property.</b> The model used is ViT-L-14 (Liaon).</i>
+        </p>
+
+        <br>
+        <img width="100%" src="images/Animals_zebra_vit-b-16-openai-combined.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-4 nearest neighbors for "animals" property.</b> The model used is ViT-B-16 (OpenAI).</i>
+        </p>
+
+        <br>
+        <img width="100%" src="images/Tiger_colors_ViT-B-32-datacomp_combined.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-4 nearest neighbors for "colors" property.</b> The model used is ViT-B-32 (Data comp). In this example, we see that both the input and retrieved images have common orange, black, and green colors.</i>
+        </p>
+
+        <br>
+        <img width="100%" src="images/Tiger_pattern_vit-b-32-openai-combined.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-4 nearest neighbors for "pattern" property.</b> The model used is ViT-B-32 (OpenAI). In this example, the input image shows an animal laying on the grass. The top retrieved images also show this common pattern of an animal laying on the grass.</i>
+        </p>
+    </div>
+  </div>
+</section>
+<hr>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">Topic Segmentation</h3>
+
+      <p style="font-size:1.37vw;">
+        In this analysis, we project a <b>Segmentation map</b> corresponding to an input text onto the image. 
+        The segmentation map is computed using various heads to illustrate the properties characterized by the head. 
+        The heatmap is shown in "blue" which matches the input text description. 
+      </p>
+      
+      <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/Vit-l-14-laoin-location-l22-h13-topic-seg.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Topic Segmentation results for Layer 22, Head 13 (a "geolocation" head).</b> The model used is ViT-L-14 (LAION-2B).</i>
+          The blue color is focused on "Eiffle tower", "Christ", "Statue of Liberty" and "Taj Mahal"  which are in France, NewYork, Brazil
+          and India respectively as provided in the text input. Interesting to note that, there is no explicit information provided 
+          such as Eiffle tower is in Paris, France. The Layer 22, Head 13 has geolocation properties which implicitly identifies it.
+        </p>
+        <br>
+        <div class=".gap-10"></div>
+          <img width="100%" src="images/vit-b-16-openai-environment-l11-h3-topic-seg.png">
+          <p style="font-size:1.37vw;">
+            <i><b>Topic Segmentation results for Layer 11, Head 3 (an "environment/weather" head).</b> The model used is ViT-B-16 (LAION-2B).</i>
+            In the first image (left), the heatmap (blue) is focused on "flowers" which matched the text description.
+            In the second image (middle), the heatmap (blue) is concentrated on the "tornado" matching the text description.
+            In the last image, the heatmap (blue) is focused on "sun" matching the description "Hot Summer".
+          </p>
+          <div class=".gap-10"></div>
+          <img width="100%" src="images/vit-b-32-openai-emotion-l10-h6-topic-seg.png">
+          <p style="font-size:1.37vw;">
+            <i><b>Topic Segmentation results for Layer 10, Head 6 (an "emotion" head).</b> The model used is ViT-B-32 (OpenAI-400M).</i>
+            In the first image (left), the heatmap (blue color) is more pronounced on the "smile" emotion in a child's face which
+            suits the text description. In the middle image, the heatmap is focused on "fear" emotion from the <b>Conjuring</b> 
+            movie. Interesting fact to note that, there is no explicit information provided that the picture correponds to the
+            "fear" emotion. In the last image, we see the heatmap is centralized on the sad emotion of "Thanos" in Marvel.
+          </p>
+    </div>
+  </div>
+</section>
+<hr>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">Contrastive Segmentation</h3>
+
+      <p style="font-size:1.37vw;">
+        In this analysis, we contrast two different text inputs using a single image. The segmentation maps for each input text are projected onto the original image to highlight how the model visually comprehends the differences between the input texts. 
+      </p>
+      
+      <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/Vit-b-16-laoin-france-contrastive-seg.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Image shows the contrastive Segmentation between portions of the image containing "tower" and "wine".</b> The model used is ViT-L-16 (LAION-2B).</i>
+        </p>
+        <br>
+        <div class=".gap-10"></div>
+          <img width="100%" src="images/thunder_contrastive_seg.png">
+          <p style="font-size:1.37vw;">
+            <i><b>Image shows the contrastive Segmentation between portions of the image containing "tornado" and "thunderstorm".</b> The model used is ViT-L-14 (LAION-2B).</i>
+          </p>
+          <br>
+          <div class=".gap-10"></div>
+            <img width="100%" src="images/Thor_contrastive_seg.png">
+            <p style="font-size:1.37vw;">
+              <i><b>Image shows the contrastive Segmentation between portions of the image containing "hammer" and "hair" of Marvel action figure Thor.</b> The model used is ViT-L-14 (LAION-2B).</i>
+            </p>
+    </div>
+  </div>
+</section>
+<hr>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">Nearest neighbors of an image</h3>
+
+      <p style="font-size:1.37vw;">
+        In this analysis, we show the nearest neighbors retrieved for an input image according to similarity scores computed using a single attention head. Since some heads characterize specific image properties, we can use their intermediate representations to obtain a property-specific similarity metric. We retrieve the most similar images to an input image by computing the similarity of the direct contributions of individual heads. As some heads capture specific aspects of the image (e.g. colors/objects), retrieval according to this metric results in images that are most similar regarding these aspects:
+      </p>
+      <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/vit-b-16-openai-nearest-image.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-8 nearest neighbors per head and image.</b> The input image is provided on the left, with the head-specific nearest neighbors shown on the right. The model used in these examples is ViT-B-16 pretrained on OpenAI-400M.</i>
+        </p>
+    </div>
+      <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/Nearest_neighbours_vit-l-14-laion.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-8 nearest neighbors per head and image.</b> The model used is ViT-L-14 pretrained on LAION-2B.</i>
+        </p>
+        <br>
+        <div class=".gap-10"></div>
+        <img width="100%" src="images/vit-l-14-openai-nearest-image.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Top-8 nearest neighbors per head and image.</b> The model used is ViT-L-14 pretrained on OpenAI-400M.</i>
+        </p>
+        <br>
+    </div>
+  </div>
+</section>
+<hr>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="title is-3 publication-title">Nearest neighbors for a text input </h3>
+      <p style="font-size:1.37vw;">
+        In this analysis, we retrieve the nearest neighbors for a given input text using different attention heads. We use the top TextSpan outputs identified for each head in these examples.
+      </p>
+      <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/Vit-b-16-openai-nearest-text.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Nearest neighbors retrieved for the top TextSpan outputs of a given layer and head.</b> The model used is ViT-B-16 pretrained on OpenAI-400M.</i>
+        </p>
+        <br>
+      <div class=".gap-10"></div>
+        <img width="100%" src="images/Vit-l-14-laoin-nearest-neighbours-text.png">
+        <p style="font-size:1.37vw;">
+          <i><b>Nearest neighbors retrieved for the top TextSpan outputs of a given layer and head.</b> The model used is ViT-L-14 pretrained on LAION-2B.</i>
+        </p>
+        <br>
+    </div>
+  </div>
+</section>
+
+  </body>
+  </html>

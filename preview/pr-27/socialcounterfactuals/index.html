@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SocialCounterfactuals: Probing and Mitigating Intersectional Social Biases in Vision-Language Models with Counterfactual Examples">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SocialCounterFactuals: Probing and Mitigating Intersectional Social Biases in Vision-Language Models with Counterfactual Examples</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SocialCounterfactuals: Probing and Mitigating Intersectional Social Biases in Vision-Language Models with Counterfactual Examples</h1>
+          <h2 class="title is-2 publication-title"><a href="https://cvpr.thecvf.com/">CVPR 2024</a></h2>
+          <div class="is-size-5 publication-authors">
+            <!-- Paper authors -->
+            <span class="author-block">  
+              <a href="https://scholar.google.com/citations?user=EKh822gAAAAJ&hl=en" target="_blank">Phillip Howard</a>,&nbsp;</span>
+            <span class="author-block">
+              <a href="https://avinashsai.github.io/" target="_blank">Avinash Madasu</a>,&nbsp;</span>
+            <span class="author-block">
+                <a href="https://www.linkedin.com/in/tiep-le/" target="_blank">Tiep Le</a>,&nbsp;</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.mx/citations?user=romEvmUAAAAJ&hl=en" target="_blank">Gustavo Lujan Moreno</a>,&nbsp;</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/anahita-bhiwandiwalla-68714917/" target="_blank">Anahita Bhiwandiwalla</a>,&nbsp;</span>
+            <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Qbu4oKwAAAAJ&hl=en" target="_blank">Vasudev Lal</a>&nbsp;</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Cognitive AI, Intel Labs &nbsp</span>
+            </div>
+
+          
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2312.00825"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2312.00825"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. 
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+            -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/IntelLabs/multimodal_cognitive_ai/tree/main/SocialCounterfactuals"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/Intel/SocialCounterfactuals" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <p style="font-size:20px">&#x1F917;</p>
+                </span>
+                <span>Data</span>
+              </a>
+            </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            While vision-language models (VLMs) have achieved remarkable performance improvements recently, there is growing evidence 
+            that these models also posses harmful biases with respect to social attributes such as gender and race. Prior studies have 
+            primarily focused on probing such bias attributes individually while ignoring biases associated with intersections between 
+            social attributes. This could be due to the difficulty of collecting an exhaustive set of image-text pairs for various 
+            combinations of social attributes. 
+            </p>
+            <p>
+              To address this challenge, we employ text-to-image diffusion models to produce  counterfactual examples for probing intersectional 
+              social biases at scale. Our approach utilizes Stable Diffusion with cross attention control to produce sets of counterfactual image-text pairs that are highly similar in their depiction 
+              of a subject (e.g., a given occupation) while differing only in their depiction of intersectional social attributes 
+              (e.g., race & gender). 
+            </p>
+            <p>
+            Through our over-generate-then-filter methodology, we produce SocialCounterfactuals, a high quality 
+            dataset containing over 171k image-text pairs for probing intersectional biases related to gender, race, and physical characteristics. 
+            We conduct extensive experiments to demonstrate the usefulness of our generated dataset for probing and mitigating intersectional 
+            social biases in state-of-the-art VLMs.
+            </p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+<hr>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Generating SocialCounterfactuals</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our approach to creating counterfactual image-text examples for intersectional social biases consists of three steps. (1) First,
+          we construct sets of image captions describing a subject with counterfactual changes to intersecting social attributes. (2) We
+          then utilize a text-to-image diffusion model with cross attention control to over-generate sets of images corresponding 
+          to the counterfactual captions, where differences among images are isolated to the induced counterfactual change (i.e., the 
+          social attributes). (3) Finally, we apply stringent filtering to identify only the highest-quality generations
+          </p>
+          <figure>
+            <img src="images/methodology.png" alt="Teaser" width="100%">
+            <figcaption><b>Figure: Overview of our methodology for generating SocialCounterfactuals.</b></figcaption>
+          </figure>
+
+          <br><br>
+          <p>
+            We group counterfactual sets into three dataset segments based on the pair of attribute types used to construct
+            the captions, which are detailed in each row of Table 1. In total, our dataset consists of 13,824 counterfactual sets with
+            170,832 image-text pairs, which represents the largest paired image-text dataset for investigating social biases to-date.
+          </p>
+        </div>
+        <figure>
+          <img src="images/statistics.png" alt="statistics" width="100%">
+          <figcaption><b>Table: Details of the number of counterfactual sets, images per set, and total images which remain in our dataset after filtering.</b></figcaption>
+        </figure>
+
+        <br><br>
+        <figure>
+          <img src="images/occupation-race-gender-examples.jpg" alt="statistics" width="100%">
+          <figcaption><b>Figure: Example of counterfactual image set for race-gender attributes.</b></figcaption>
+        </figure>
+
+        <br><br>
+        <figure>
+          <img src="images/occupation-physical-gender-examples.jpg" alt="statistics" width="100%">
+          <figcaption><b>Figure: Example of counterfactual image sets for physical characteristics-gender attributes.</b></figcaption>
+        </figure>
+
+        <br><br>
+        <figure>
+          <img src="images/occupation-physical-race-examples.jpg" alt="statistics" width="100%">
+          <figcaption><b>Figure: Example of counterfactual image sets for physical characteristics-race attributes.</b></figcaption>
+        </figure>
+
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Probing Intersectional Biases</h2>
+
+        <div class="content has-text-justified">
+          To probe intersectional social biases in VLMs, we calculate MaxSkew@K over our dataset for six state-of-the-art VLMs: <a href="https://arxiv.org/abs/2308.08428">ALIP</a>,
+          <a href="https://arxiv.org/abs/2103.00020">CLIP</a>, <a href="https://flava-model.github.io/">FLAVA</a>, <a href="https://arxiv.org/abs/2305.20088">LaCLIP</a>,
+          <a href="https://github.com/mlfoundations/open_clip">OpenCLIP</a> and <a href="https://arxiv.org/abs/2112.12750">SLIP</a>. 
+          We calculate MaxSkew@K by retrieving images from our counterfactual sets using prompts which are neutral with respect to the
+          investigated attributes. For example, given a prompt constructed from the template <q>A {race} {gender} construction
+          worker</q>, we form its corresponding attribute netural prompt <q>A construction worker.</q> We construct neutral prompts in 
+          this manner for each unique combination of prefixes and subjects, averaging their text representations across different 
+          prefixes to obtain a single text embedding for each subject. MaxSkew@K is then calculated by retrieving the top-K
+          images for the computed text embedding from the set of all images generated for the subject which met our filtering and
+          selection criteria. We set K = |A<sub>1</sub>| × |A<sub>2</sub>|, where A<sub>1</sub> and A<sub>2</sub> are the 
+          investigated attribute sets.
+        </div>
+
+        <br><br>
+        <figure>
+          <img src="images/distribution-occupations.png" alt="statistics" width="100%">
+          <figcaption><b>Figure: Distribution of MaxSkew@K measured across occupations for (a) Race-Gender, (b) Physical Characteristics-Gender, and (c)
+            Physical Characteristics-Race intersectional biases. Max (min) values are plotted as red (green) circles with corresponding occupation names</b></figcaption>
+        </figure>
+
+        <br><br>
+        <figure>
+          <img src="images/marginal-gender.png" alt="statistics" width="70%">
+          <figcaption><b>Figure: Mean of (marginal) gender MaxSkew@K measured across occupations for different races.</b></figcaption>
+        </figure>
+
+        <br><br>
+        <figure>
+          <img src="images/doctor.png" alt="statistics" width="100%">
+          <figcaption><b>Figure: Proportion of images retrieved @k = 12 using neutral prompts for the <q>Doctor</q> occupation.</b></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Mitigating Intersectional Biases</h2>
+
+        <div class="content has-text-justified">
+          We investigate the suitability of our SocialCounterfactuals dataset for debiasing VLMs through additional training. For each of 
+          the three segments of our dataset we withhold counterfactual sets associated with 20% of the occupation subjects for testing 
+          and use the remainder as a training dataset. We then separately finetune ALIP, CLIP, and FLAVA on each of these three 
+          training datasets, which we hereafter refer to as the <q>debiased</q> variants of these models. o estimate the magnitude 
+          of debiasing, we evaluate each model's MaxSkew@K for intersectional bias using the withheld testing dataset containing 
+          20% of the occupations.
+        </div>
+        <figure>
+          <img src="images/debiasing.png" alt="statistics" width="100%">
+          <figcaption><b>Table: Mean of MaxSkew@K for pre-trained and debiased variants of CLIP, ALIP, and FLAVA, estimated by 
+            withholding counterfactual sets for 20% of the occupations in our dataset. Best results are in bold.</b></figcaption>
+        </figure>
+        
+        <br><br>
+        <div class="content has-text-justified">
+          Since our dataset was synthetically generated, a natural question to ask is how well our observed debiasing effects 
+          extend to evaluations with real image-text pairs. Unfortunately, there are no such existing resources for measuring the 
+          intersectional social biases that we investigate in this work. However, several real image-text datasets have
+          been proposed for evaluating (marginal) social biases for attributes such as perceived race and gender. To evaluate our 
+          Debiased CLIP model on such datasets, we use the Protected-Attribute Tag Association (PATA) dataset for nuanced 
+          reporting of biases associated with race, age, and gender protected attributes. We also evaluate our Debiased CLIP 
+          model on the Visogender dataset which was curated to benchmark gender bias in image-text pronoun resolution.
+        </div>
+        <figure>
+          <img src="images/debiasing-external.png" alt="statistics" width="70%">
+          <figcaption><b>Table: MaxSkew@K of our debiased CLIP model as well as pre-trained CLIP on the 
+          VisoGender and PATA datasets.</b></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title">Compute infrastructure</h2>
+        <div class="content has-text-justified">
+          The counterfactual image-text data was created using a large AI cluster equipped with Intel 3rd Generation 
+          <a href="https://www.intel.com/content/www/us/en/products/details/processors/xeon.html?cid=sem&source=sa360&campid=2024_ao_cbu_us_gmo_gmocrbu_awa_text-link_brand_broad_cd_ai-xeon_3500186468_google_b2b_is_non-pbm_intel&ad_group=AI_Brand-Xeon_XEON_Broad&intel_term=latest+intel+server+processor&sa360id=43700079820228613&gad_source=1&gclid=CjwKCAjw5v2wBhBrEiwAXDDoJbMHdTvglMLzM4yg3aUDFwmXxtNT_KYCI2azdJH1yE002rE5KtwD8BoC__AQAvD_BwE&gclsrc=aw.ds"> Xeon®</a>
+          processors and <a href="https://habana.ai/products/gaudi2/">Intel® Gaudi-2® AI accelerators</a>. 
+          Up to 256 Intel Gaudi-2® AI accelerators were used to generate our SocialCounterfactuals dataset.
+        </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{howard2023probing,
+      title={Probing and Mitigating Intersectional Social Biases in Vision-Language Models with Counterfactual Examples},
+      author={Howard, Phillip and Madasu, Avinash and Le, Tiep and Moreno, Gustavo Lujan and Bhiwandiwalla, Anahita and Lal, Vasudev},
+      journal={CVPR},
+      year={2024},
+    }</code></pre>
+  </div>
+</section>
+</body>
+</html>
