@@ -1,3 +1,8 @@
+# Dataset
+
+Follow the instructions to get the dataset from
+[liuhaotian/LLaVA-CC3M-Pretrain-595K](https://huggingface.co/datasets/liuhaotian/LLaVA-CC3M-Pretrain-595K)
+
 # LLaVA-Gemma GPU
 
 Install requirements
