@@ -36,6 +36,9 @@ fi
 HPU_IDS=(${HABANA_VISIBLE_DEVICES//,/ })
 NUM_HPU=${#HPU_IDS[@]}
 GRAD_ACC=$((TOTAL_BATCH_SIZE / (DEVICE_BATCHSIZE * NUM_HPU)))
+
+echo "Habana devices: [$HABANA_VISIBLE_DEVICES]"
+echo "Device batch size: $DEVICE_BATCHSIZE"
 echo "Number of HPUs: $NUM_HPU"
 echo "Gradient accumulation steps: $GRAD_ACC"
 

@@ -1,0 +1,24 @@
+# We are using the gaudi-docker for hl-smi version 1.16.0 and pytorch 2.2.2
+FROM vault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest
+
+ARG HF_TOKEN=""
+ARG HABANA_VISIBLE_DEVICES=0
+ARG DEVICE_BATCHSIZE=8
+ARG IMAGE_FOLDER=""
+ARG DATA_PATH=""
+
+# Set ENV variables
+ENV HF_TOKEN=${HF_TOKEN}
+ENV HABANA_VISIBLE_DEVICES=${HABANA_VISIBLE_DEVICES}
+ENV DEVICE_BATCHSIZE=${DEVICE_BATCHSIZE}
+ENV IMAGE_FOLDER=${IMAGE_FOLDER}
+ENV DATA_PATH=${DATA_PATH}
+
+# Get the repo multimodal_cognitive_ai
+RUN git clone https://github.com/IntelLabs/multimodal_cognitive_ai.git /home/multimodal_cognitive_ai
+
+WORKDIR /home/multimodal_cognitive_ai/LLaVA-Gemma
+RUN pip install -r requirements-gaudi.txt
+RUN huggingface-cli login --token ${HF_TOKEN}
+RUN chmod a+x ./scripts/v1_5/finetune_gaudi.sh
+RUN chmod a+x ./scripts/v1_5/pretrain_gaudi.sh
