@@ -737,7 +737,6 @@ def preprocess_gemma(
                     f"warning: tokenization mismatch: {cur_len} vs. {total_len}."
                     f" (ignored)"
                 )
-                
     return dict(
         input_ids=input_ids,
         labels=targets,
@@ -919,7 +918,6 @@ class DataCollatorForSupervisedDataset(object):
             input_ids = input_ids[:, :maxlen]
             labels = labels[:, :maxlen]
 
-
         batch = dict(
             input_ids=input_ids,
             labels=labels,
@@ -956,6 +954,7 @@ def train(attn_implementation=None):
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
     local_rank = training_args.local_rank
     compute_dtype = (torch.float16 if training_args.fp16 else (torch.bfloat16 if training_args.bf16 else torch.float32))
+
     if IS_HPU:
         local_rank_map = os.environ.get("LOCAL_RANK_MAP")
         if local_rank_map:
@@ -991,6 +990,7 @@ def train(attn_implementation=None):
                 model_args.model_name_or_path,
                 config=config,
                 cache_dir=training_args.cache_dir,
+                torch_dtype=(torch.bfloat16 if training_args.bf16 else None),
                 **bnb_model_from_pretrained_args
             )
         elif 'gemma' in model_args.model_name_or_path: # MH: model 
