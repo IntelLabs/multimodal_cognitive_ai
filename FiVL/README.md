@@ -13,9 +13,12 @@ To demonstrate the utility of our dataset, we introduce an innovative training t
  This repository contains all the resources necessary to reproduce our work, including scripts for data augmentation, evaluation, training, and explainability as well as our FiVL-Instruct dataset and our checkpoint.
 
 ## Key Resources  
+<!--
 - **Dataset**: [Hugging Face Dataset](<https://huggingface.co/Intel/fivl-instruct>)  
 - **Model**: [Hugging Face Model](<https://huggingface.co/Intel/fivl-vm>)  
-
+-->
+- **Dataset**: [Hugging Face Dataset] ** Dataset coming soon. **
+- **Model**: [Hugging Face Model] ** Model coming soon. **
 
 ---
 
