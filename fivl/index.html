@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="FiVL">
+  <meta property="og:title" content="FiVL" />
+  <meta property="og:description" content="FiVL: A Framework for Improved Vision-Language Alignment" />
+  <meta property="og:url" content="https://intellabs.github.io/multimodal_cognitive_ai/fivl/" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="FiVL">
+  <meta name="twitter:description" content="FiVL: A Framework for Improved Vision-Language Alignment">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/static/images/comparisons_interface.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords"
+    content="Vision-and-Language, Multimodal, Training, Vision-Language Alignment, Explainability, Interpretability">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>FiVL </title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">-->
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">FiVL: A Framework for Improved Vision-Language Alignment</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block"></span>
+              <a href="https://openreview.net/profile?id=~Estelle_Aflalo1" target="_blank">Estelle
+                Aflalo</a></span><sup></sup>,&nbsp;
+              <span class="author-block">
+                <a href="https://openreview.net/profile?id=~Gabriela_Ben-Melech_Stan1" target="_blank">Gabriela Ben Melech
+                  Stan</a></span><sup></sup>,&nbsp;
+              <span class="author-block"></span>
+              <a href="https://openreview.net/profile?id=~Tiep_Le2" target="_blank">Tiep Le</a></span><sup></sup>,&nbsp;
+
+                <span class="author-block"></span>
+                <a href="https://openreview.net/profile?id=~Man_Luo2" target="_blank">Man Luo</a></span><sup></sup>,&nbsp;
+
+                <span class="author-block"></span>
+                <a href="https://openreview.net/profile?id=~Shachar_Rosenman1" target="_blank">Shachar Rosenman</a></span><sup></sup>,&nbsp;
+
+            <span class="author-block"></span>
+                  <a href="https://openreview.net/profile?id=~Sayak_Paul1" target="_blank">Sayak Paul</a></span><sup></sup>,&nbsp;
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=IV0Nu40AAAAJ&hl=en" target="_blank">Shao-Yen
+                  Tseng</a></span><sup></sup>,&nbsp;
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Qbu4oKwAAAAJ&hl=en" target="_blank">Vasudev
+                  Lal</a></span><sup></sup>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <sup>*</sup><span class="author-block">Equal contribution&nbsp;&nbsp;&nbsp;</span>
+            </div>
+
+            <!--                  &lt;!&ndash; Github link &ndash;&gt;-->
+            <!--                  <span class="link-block">-->
+            <!--                    <a href="https://github.com/YOUR REPO HERE" target="_blank"-->
+            <!--                    class="external-link button is-normal is-rounded is-dark">-->
+            <!--                    <span class="icon">-->
+            <!--                      <i class="fab fa-github"></i>-->
+            <!--                    </span>-->
+            <!--                    <span>Code</span>-->
+            <!--                  </a>-->
+            <!--                </span>-->
+
+            <!-- ArXiv abstract Link -->
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/TBD" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+            <!-- Demo Link -->
+            <span class="link-block">
+              <a href="/" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <p style="font-size:20px">&#x1F917;</p>
+                </span>
+                <span>Dataset</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="https://github.com/IntelLabs/fivl" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h4 class="subtitle has-text-centered">
+          FiVL, a novel method for constructing datasets designed to train LVLMs for enhanced visual grounding and to
+          evaluate their effectiveness in achieving it.
+        </h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color:#efeff081">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Large Vision Language Models (LVLMs) have achieved significant progress in integrating visual and textual
+              inputs for multimodal reasoning. However, a recurring challenge is ensuring these models utilize visual
+              information as effectively as linguistic content when both modalities are necessary to formulate an
+              accurate answer. We hypothesize that hallucinations arise due to the lack of effective visual grounding in
+              current LVLMs. This issue extends to vision-language benchmarks, where it is difficult to make the image
+              indispensable for accurate answer generation, particularly in vision question-answering tasks. In this
+              work, we introduce FiVL, a novel method for constructing datasets designed to train LVLMs for enhanced
+              visual grounding and to evaluate their effectiveness in achieving it. These datasets can be utilized for
+              both training and assessing an LVLM's ability to use image content as substantive evidence rather than
+              relying solely on linguistic priors, providing insights into the model's reliance on visual information.
+              To demonstrate the utility of our dataset, we introduce an innovative training task that outperforms
+              baselines alongside a validation method and application for explainability.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Model Overview -->
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Chatbox -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">FiVL pipeline</h2>
+          <h3 class="title is-5">How to augment datasets</h3>
+          <div class="content has-text-justified">
+            <img id="comparisons_interface_fig" src="static/images/pipeline.png" alt="Pipeline">
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">FiVL Datasets</h2>
+        <h2>FiVL augments any training or evaluation dataset by identifying key expressions in the text—phrases that
+          cannot be evoked without referencing the image—and generating corresponding segmentation masks for them. We
+          applied our framework on 4 existing datasets: LLaVA-1.5-mix-665K, VQA-v2, GQA and POPE, and created
+          FiVL-Instruct, FiVL-VQAv2, FiVL-GQA, and FiVL-POPE, respectively.</h2>
+        </h2>
+        <!-- <img src="static/images/dataset/good_examples.png" alt="good_ex" /> -->
+      </div>
+      <!-- Image carousel -->
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/kite.png" alt="example0" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: How many kites can be seen flying in the air? A: There is <b><u>one kite</u></b> visible, flying high in the blue sky.
+            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/large_clock.png" alt="a pair of red and black bags on display" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: What does the overall architecture of the building resemble? A: The overall architecture of the building resembles that of a castle, with two prominent towers connected by a section with the <b><u>large clock</u></b>.
+            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/painting.png" alt="four cans of beer in a bucket of ice" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: Is there any other item plaved near the chair and tennis racket? A: Yes, there is a <u><b>framed painting</b></u> propped up against the green chair next to the tennis racket.            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/sidewalk.png"
+                alt="a white and red sports car driving down a road" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: Is the fire hydrant on the sidewalk or on the road? A: The fire hydrant is situated on the curb, which is the edge between the sidewalk and the road, but it is more on the <b><u>sidewalk side</u></b>
+            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/stone.png"
+                alt="a red brick building sitting in the middle of a field" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: Is the bench located on the grass or a paved surface? A: The bench is located on the grass with a <b><u> stone stab underneath it</u></b>, in a park setting.
+            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/swinging_bat.png"
+                alt="a red and yellow truck with a large light bar on top" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: What is the baseball player doing in the image? A: In the image, the baseball player is <b><u>swinging a bat</u></b> and hitting the ball during a baseball game.
+            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/white_frosting.png"
+                alt="looking up at a construction site with scaffolding" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: How is the cake presented? A: The cake is presented on a plate, and it appears to be homemade with <b><u>white frosting covering the exterior</u></b>.
+            </div>
+          </div>
+          <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+            <div class="card-image" style="margin: 0; padding: 0;">
+              <img src="static/images/dataset/wooden_table.png"
+                alt="a group of houses sitting on top of a green hillside" />
+            </div>
+            <div class="card-content has-text-centered">
+              Q: How are the wine glasses arranged on the table? A: The wine glasses are arranged in a series or lined up on the <b><u>long brown wooden table</u></b> in front of the window.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container is-max-desktop">
+        <h2>
+          FiVL was evaluated using both manual and automated methods to assess the quality of the extracted key
+          expressions and their corresponding segmentation masks.
+          The results indicate that the highest scores were achieved for segmentation masks covering less than 20% of
+          the image.
+        </h2>
+        <br>
+        <div align="center"><img src="static/images/histo.png" alt="histogram" width="500" /></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Edit interface -->
+      <div class="column is-six-fifths">
+        <h3 class="title is-5">Training on FiVL-Instruct</h2>
+          <h2>
+            We introduce a novel pretraining task, Vision Model Modeling. In this work, we propose not only to guide the
+            text logits but to also guide the visual outputs of the image patches provided by the segmentation masks
+            towards the key expression text tokens they represent.
+          </h2>
+          <!-- <div class="content has-text-justified"> -->
+          <div style="display: flex; justify-content: center;">
+            <img id="examples_fig" src="static/images/training_overview.png" alt="training_overview"
+              style="max-width: 60%; height: auto;">
+          </div>
+
+          <h2>
+            Using this additional loss, we outperform the baseline model over different benchmarks
+          </h2>
+          <div class="content has-text-justified">
+            <div style="display: flex; justify-content: center;">
+              <img id="examples_fig" src="static/images/radar_plot.png" alt="training_overview"
+                style="max-width: 60%; height: auto;">
+            </div>
+          </div>
+
+          <h2>
+            And as a side effect, our model inherently generates segmentation mask by associating each image patch with
+            the most likely text token prediction.
+          </h2>
+          <div class="container">
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/bear.png" alt="bear" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "bear".
+                </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/birds.png" alt="birds" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "birds". </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/bott.png" alt="bott" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "bott". </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/chair.png" alt="chair" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "chair". </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/Dog.png" alt="dog" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "dog". </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/people.png" alt="people" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "people". </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/train.png" alt="train" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "train". </div>
+              </div>
+              <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                <div class="card-image" style="margin: 0; padding: 0;">
+                  <img src="static/images/segmentation_appendix/water.png" alt="water" style="max-width: 40%; height: auto;">
+                </div>
+                <div class="card-content has-text-centered">
+                  Image patches associated with the text token "water". </div>
+              </div>
+            </div>
+          </div>
+          <h2>
+            We evaluated the quality of the generated segmentation masks using IoU metric against the Grounded-SAM
+            model, and compared it to the baseline model.
+          </h2>
+          <div class="content has-text-justified">
+            <div style="display: flex; justify-content: center;">
+              <img id="examples_fig" src="static/images/segmentation_results.png" alt="Attention heatmaps"
+                style="max-width: 70%; height: auto;">
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Attention -->
+      <div class="column is-six-fifths">
+        <h3 class="title is-5">Evaluation with FiVL-VQAv2, FiVL-GQA and FiVL-POPE</h2>
+          <h2>
+            We introduce the Visual Reliance Score, a metric that quantifies how much a model relies on images to
+            support its answers within a given benchmark. At the model level, it highlights which models effectively
+            utilize images to answer questions across benchmarks. At the benchmark level, it reveals which benchmarks
+            pose greater challenges in terms of visual reliance.
+          </h2>
+          <div class="content has-text-justified">
+            <div style="display: flex; justify-content: center;">
+              <img id="examples_fig" src="static/images/evaluation_results.png" alt="Attention heatmaps"
+                style="max-width: 60%; height: auto;">
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Attention -->
+      <div class="column is-six-fifths">
+        <h3 class="title is-5">Explainability </h2>
+          <h2>
+            We further leveraged our FiVL dataset to develop a metric that identifies attention heads most effective at
+            aligning vision and text.
+          </h2>
+
+          <div class="content has-text-justified">
+            <div style="display: flex; justify-content: center;">
+              <img id="examples_fig" src="static/images/spearman_vl_alignT_head_500_llava-v1.5-7b.png"
+                alt="Attention heatmaps" style="max-width: 100%; height: auto;">
+            </div>
+          </div>
+          <!-- <div class="content has-text-justified"> -->
+            <div class="container">
+              <div id="results-carousel" class="carousel results-carousel">
+                <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                  <div class="card-image" style="margin: 0; padding: 0;">
+                    <img src="static/images/turn_0_head_10_6_girl.png" alt="bear" />
+                  </div>
+                  <div class="card-content has-text-centered">
+                    Attention Head (10,6) of the token ”girl”. Q - Who are the two people playing Frisbee in the image?
+                    A - The two people playing Frisbee in the image are a man and a little girl.
+                  </div>
+                </div>
+                <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                  <div class="card-image" style="margin: 0; padding: 0;">
+                    <img src="static/images/turn_0_head_10_6_three.png" alt="birds" />
+                  </div>
+                  <div class="card-content has-text-centered">
+                    Attention Head (10,6) of the token three. Q - A - There are three people in the image
+                  </div>
+                </div>
+                <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                  <div class="card-image" style="margin: 0; padding: 0;">
+                    <img src="static/images/turn_0_head_14_11_girl.png" alt="bott" />
+                  </div>
+                  <div class="card-content has-text-centered">
+                    Attention Head (14,11) of the token ”girl”. Q - Who are the two people playing Frisbee in the image?
+                    A - The two people playing Frisbee in the image are a man and a little girl.
+                  </div>
+                </div>
+                <div class="card" style="display: inline-block; padding: 0; border: none; box-shadow: none; text-align: center;">
+                  <div class="card-image" style="margin: 0; padding: 0;">
+                    <img src="static/images/turn_0_head_14_11_three.png" alt="chair" />
+                  </div>
+                  <div class="card-content has-text-centered">
+                    Attention Head (14, 11) of the token three. Q - A - There are three people in the image.
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Paper poster -->
+  <section class="section" style="background-color:#f7f7f881">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-six-fifths">
+          <h2 class="title">Paper</h2>
+          <!--         <span style='font-style:italic;'>Coming soon</span> -->
+          <!--         <iframe  src="static/pdfs/paper.pdf" width="100%" height="550"></iframe> -->
+          <object data="static/pdfs/paper.pdf" width="100%" height="550" type='application/pdf'></object>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--End paper poster -->
+
+
+
+  <!--BibTex citation -->
+  <section class="hero is-small is-light has-text-justified">
+    <div class="hero-body">
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <!--       <span style='font-style:italic;'>Coming soon</span> -->
+          <pre><code>@misc{
+}</code></pre>
+        </div>
+      </section>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p style="color:gray;font-size:9.9px;">
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a>, is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+              <a href="https://www.flaticon.com/free-icons/magic" title="magic icons">Magic icons created by Freepik -
+                Flaticon</a>
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+</body>
+
+</html>
