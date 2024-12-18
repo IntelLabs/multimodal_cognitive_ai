@@ -1,6 +1,4 @@
-# PATH_TO_LLAVA='/home/gbenmele/lvlm/LLaVA_gabi' #"/home/gbenmele/lvlm/llava_updated/LLaVA"  #
 import sys, os
-# sys.path.append(PATH_TO_LLAVA)
 import json
 from PIL import Image
 import torch
@@ -12,10 +10,6 @@ from transformers import CLIPProcessor, CLIPModel
 import torch
 import numpy as np
 from transformers import StoppingCriteria
-
-
-# def load_image_from_base64(image):
-#     return Image.open(BytesIO(base64.b64decode(image)))
 
 
 def expand2square(pil_img, background_color):
@@ -33,7 +27,6 @@ def expand2square(pil_img, background_color):
 
 
 def process_images(images, image_processor, image_aspect_ratio):
-    #image_aspect_ratio = getattr(model_cfg, "image_aspect_ratio", None)
     new_images = []
     if image_aspect_ratio == 'pad':
         for image in images:
@@ -61,25 +54,6 @@ def save_process_img_for_llava(image_path, output_dir, image_aspect_ratio="pad")
     pil_image = to_pil_image(images[0])
 
     return pil_image
-
-# def convert_mask_image_to_mask_vector(mask_image_path, num_patches_y = 24, num_patches_x = 24):
-#     image = Image.open(mask_image_path).convert('L')
-#     image_array = np.array(image)
-#     height, width = image_array.shape
-#     assert height == 336 & width == 336, print("image size is not 336 x 336")
-#     patch_height = height // num_patches_y
-#     patch_width = width // num_patches_x
-#     patch_means = np.zeros((num_patches_y, num_patches_x))
-#     for i in range(num_patches_y):
-#         for j in range(num_patches_x):
-#             start_y = i * patch_height
-#             end_y = start_y + patch_height
-#             start_x = j * patch_width
-#             end_x = start_x + patch_width
-#             patch = image_array[start_y:end_y, start_x:end_x]
-#             patch_mean = np.mean(patch)/255.0
-#             patch_means[i, j] = patch_mean
-#     return np.array(patch_means)
 
 def reshape_mask_to_mask_vector(image_array, num_patches_y = 24, num_patches_x = 24):
     height, width = image_array.shape
