@@ -2,8 +2,7 @@
 
 **Authors**: Estelle Aflalo, Gabriela Ben Melech Stan, Tiep Le, Man Luo , Shachar Rosenman , Sayak Paul, Shao-Yen Tseng , Vasudev Lal 
 
-[ [Project Page](https://intellabs.github.io/multimodal_cognitive_ai/FiVL)]  [[FiVL-Instruct Dataset](https://huggingface.co/Intel/fivl-instruct)] [[Model](https://huggingface.co/Intel/fivl-vm)] [[Paper](https://arxiv.org/abs/2412.14672)]
-
+[[Paper](https://arxiv.org/abs/2412.14672)] [ [Project Page]([https://intellabs.github.io/multimodal_cognitive_ai/FiVL](https://intellabs.github.io/multimodal_cognitive_ai/fivl/))]  [[FiVL-Instruct Dataset](https://huggingface.co/Intel/fivl-instruct)] [[Model](https://huggingface.co/Intel/fivl-vm)] 
 In this work, we introduce FiVL, a novel method for constructing datasets designed to train LVLMs for enhanced visual grounding and to evaluate their effectiveness in achieving it. These datasets can be utilized for both training and assessing an LVLM's ability to use image content as substantive evidence rather than relying solely on linguistic priors, providing insights into the model's reliance on visual information. 
 To demonstrate the utility of our dataset, we introduce an innovative training task that outperforms baselines alongside a validation method and application for explainability.
 
