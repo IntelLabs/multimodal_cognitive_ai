@@ -1,7 +1,7 @@
-gradio==5.5.0
+gradio==5.11.0
 transformers
 diffusers
-flair==0.14.0
+flair==0.15.0
 numpy
 tqdm
 webdataset
