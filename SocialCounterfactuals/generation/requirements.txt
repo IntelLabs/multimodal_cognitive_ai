@@ -1,6 +1,6 @@
 absl-py==1.4.0
 accelerate==0.23.0
-aiohttp==3.11.0b0
+aiohttp==3.11.18
 aiosignal==1.3.1
 annotated-types==0.5.0
 antlr4-python3-runtime==4.9.3
@@ -137,7 +137,7 @@ tokenizers==0.13.3
 torchdiffeq==0.2.3
 torchmetrics==1.0.2
 torchsde
-tqdm==4.66.3
+tqdm==4.67.1
 traitlets==5.9.0
 trampoline==0.1.2
 transformers==4.50.0
