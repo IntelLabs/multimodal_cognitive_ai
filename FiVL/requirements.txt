@@ -16,4 +16,4 @@ flash-attn==2.7.0.post2
 
 
 openai==1.56.0
-azure-identity==1.19.0 
+azure-identity==1.22.0 
