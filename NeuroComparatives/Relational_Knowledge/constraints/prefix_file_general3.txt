@@ -1,0 +1,4 @@
+{"constraints": {"clauses": [
+{"terms": ["in", "on", "of", "for", "of", "at", "in", "anybody", "it", "one", "the", "a", "that", "or", "got", "do"], "polarity": 1, "max_count": 2, "min_count": 0, "type": "Term"}
+
+]}}
