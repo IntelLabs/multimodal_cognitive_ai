@@ -27,6 +27,8 @@ Code from our NAACL 2024 paper:
 3. Download gpt2-xl and flair:
 
     ```bash
+    mkdir output
+    mkdir models
     cd models
     git lfs install
     git clone https://huggingface.co/flair/pos-english
