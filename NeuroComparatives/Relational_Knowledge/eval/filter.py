@@ -17,11 +17,13 @@ def preprocess_generations(file_path):
     gen = gen.rename(columns = {'knowledge 0' : 'knowledge'})
     
     cols = ['1st entity', '2nd entity', 'class']
+    col_index = [list(gen.columns).index(i) for i in cols]
     
     gen['cluster'] = gen.isna().apply(lambda x: all(x), axis=1).astype(int).cumsum()
     non_na = list(gen[cols].dropna().index) + [gen.shape[0]]
-    for i in range(len(non_na)-1):
-        gen.iloc[non_na[i]+1:non_na[i+1], gen.columns.isin(cols)] = gen.iloc[non_na[i], gen.columns.isin(cols)]
+    for i in tqdm(range(len(non_na)-1)):
+        for col in col_index:
+            gen.iloc[non_na[i]+1:non_na[i+1], col] = gen.iloc[non_na[i], col]
     
     gen = gen.dropna(subset=['prompt'])
     gen['2nd entity satisfied'] = gen.apply(lambda x: x['2nd entity'] in x['knowledge'], axis=1)
@@ -45,6 +47,18 @@ def pos_filter(gen, filter_on_first_noun, entity_constraint_set, ordered):
         adv_comp = [tk for tk in adv if tk in adverbs]
 
         tokens = [tk.text for tk in doc]
+        if len(tokens) == 0:
+            adj_all.append('')
+            adj_comp_all.append('')
+            adv_all.append('')
+            adv_comp_all.append('')
+            pos_match_all.append('')
+            first_noun_all.append('')
+            than_all.append(False)
+            first_noun_chunk_all.append('')
+            first_tk_all.append('')
+            last_tk_all.append('')
+            continue
         pos = [tk.pos_ for tk in doc]
         pos_match = [' '.join(tokens[i:i+4]) for i in range(len(tokens)-3) if pos[i:i+4] in [['NOUN', 'AUX', 'DET', 'ADJ'], ['NOUN', 'AUX', 'ADV', 'ADJ']]]
         pos_match += [' '.join(tokens[i:i+5]) for i in range(len(tokens)-4) if pos[i:i+5] in [['NOUN', 'AUX', 'ADV', 'VERB', 'ADJ'], ['NOUN', 'ADV', 'VERB', 'DET', 'ADJ'], ['NOUN', 'AUX', 'ADV', 'AUX', 'ADJ']]]
@@ -69,7 +83,10 @@ def pos_filter(gen, filter_on_first_noun, entity_constraint_set, ordered):
         than_all.append('than' in tokens)
         first_noun_chunk_all.append(first_noun_chunk)
         first_tk_all.append(tokens[0])
-        last_tk_all.append(tokens[-2] if tokens[-1] == '.' else tokens[-1])
+        if len(tokens) == 1 or tokens[-1] != '.':
+            last_tk_all.append(tokens[-1])
+        else:
+            last_tk_all.append(tokens[-2])
         
     gen['adj'] = adj_all
     gen['adj_comp'] = adj_comp_all
@@ -183,8 +200,11 @@ def contradiction_filter(gen, gen_all, top_n):
             other_gen = gen_all[(gen_all['prompt'] == gen_subset.iloc[i]['prompt']) & (gen_all['knowledge'] != gen_subset.iloc[i]['knowledge'])]
             premise = gen_subset.iloc[i]['knowledge'].split(',')[-1].strip()
             hypothesis = other_gen['knowledge'].apply(lambda x: x.split(',')[-1].strip()).tolist()
+            if len(hypothesis) == 0:
+                i+=1
+                continue
+            
             max_val, max_index = classify_entailment(model, tokenizer, premise, hypothesis)
-
             entail_index = ((max_val >= 0.85) & (max_index == 0))
             df_entail = other_gen.iloc[entail_index.tolist()].assign(prob = max_val[entail_index])
             df_entail = pd.concat([df_entail, gen_subset.iloc[i:i+1]])
