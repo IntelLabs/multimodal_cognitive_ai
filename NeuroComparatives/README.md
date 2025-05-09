@@ -24,16 +24,16 @@ Code from our NAACL 2024 paper:
     conda activate neurologic
     ```
 
-3. Download gpt2-xl and flair:
+3. Download gpt2-xl, flair, and spacy models:
 
     ```bash
-    mkdir output
     mkdir models
     cd models
     git lfs install
     git clone https://huggingface.co/flair/pos-english
     mv pos-english flair_pos_english
     git clone https://huggingface.co/openai-community/gpt2-xl
+    python -m spacy download en_core_web_sm
     ```
 
 ## Generate NeuroComparatives
@@ -51,6 +51,7 @@ Code from our NAACL 2024 paper:
 2. Prepare prompts and constraints for the sample input entities file. To generate NeuroComparatives for your own entities, create a tab-delimited file in the same format where the first column is a class name and the last two columns contain the entity pair.
 
     ```bash
+    mkdir ../output
     python NeuroLogic_prompt_constraint.py \
     --input_path ../input/entities_0_to_10k_flat.csv \
     --output_file ../output/entities_0_to_10k_flat_rdy2generate.csv \
