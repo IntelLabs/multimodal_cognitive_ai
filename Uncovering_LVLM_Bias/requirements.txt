@@ -202,7 +202,7 @@ tomli==2.2.1
 torch==2.7.0
 torchaudio==2.2.1
 torchvision==0.17.1
-tornado==6.4.2
+tornado==6.5.1
 tqdm==4.66.3
 traitlets==5.14.3
 transformers==4.51.3
