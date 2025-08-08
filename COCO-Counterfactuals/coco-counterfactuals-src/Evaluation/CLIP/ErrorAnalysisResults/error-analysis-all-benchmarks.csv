@@ -1,0 +1,7 @@
+benchmark,sum_frequency,sum_frequency/len(categories),total_appearance_in_coco_cfs,appearance_percentages (%)
+cifar10,398,39.8,9,90.0
+cifar100,3446,34.46,55,55.0
+caltech101,354,3.54,24,24.0
+caltech256,744,2.894941634241245,48,18.67704280155642
+food101,28,0.27722772277227725,3,2.9702970297029703
+imagenet,887,0.8896690070210632,105,10.531594784353059

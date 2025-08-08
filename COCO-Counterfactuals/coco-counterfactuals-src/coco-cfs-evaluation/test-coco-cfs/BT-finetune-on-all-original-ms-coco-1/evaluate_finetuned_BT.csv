@@ -1,0 +1,2 @@
+model,T2I.recall@1,T2I.recall@5,T2I.recall@10,I2Trecall@1,I2Trecall@5,I2Trecall@10
+/export/share/projects/mcai/COCO-Counterfactuals/checkpoints-1/BT-finetune-on-all-original-ms-coco-1,44.6794193982505,75.3821013169278,84.47563202922234,41.77675665326441,71.77867126172698,81.8782309017806

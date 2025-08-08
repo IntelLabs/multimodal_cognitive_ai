@@ -1,0 +1,2 @@
+model,T2I.recall@1,T2I.recall@5,T2I.recall@10,I2Trecall@1,I2Trecall@5,I2Trecall@10
+/export/share/projects/mcai/COCO-Counterfactuals/checkpoints-1/Flava-finetune-on-all-original-ms-coco-1,52.552148418725366,81.08238008266846,88.42641545707968,46.697300402067775,76.3641585295807,85.67872869998085

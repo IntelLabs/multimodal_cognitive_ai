@@ -1,0 +1,2 @@
+model,accuracy
+openai/clip-vit-base-patch32,0.59246
