@@ -1,0 +1,2 @@
+model,T2I.recall@1,T2I.recall@5,T2I.recall@10,I2Trecall@1,I2Trecall@5,I2Trecall@10
+/export/share/projects/mcai/COCO-Counterfactuals/checkpoints/BridgeTower/BT-finetune-on-coco-and-coco_cfs-all-1/checkpoint-20895,70.89999999999999,92.10000000000001,95.89999999999999,71.1,90.9,94.8

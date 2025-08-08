@@ -1,0 +1,2 @@
+model,T2I.recall@1,T2I.recall@5,T2I.recall@10,I2Trecall@1,I2Trecall@5,I2Trecall@10
+/export/share/projects/mcai/COCO-Counterfactuals/checkpoints-nodevset/CLIP/CLIP-finetune-on-coco-and-coco_cfs-base-1,68.39080459770115,90.91954022988506,96.26436781609196,72.51043530113299,92.78473464519976,97.07811568276684
