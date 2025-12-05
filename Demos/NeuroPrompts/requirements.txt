@@ -1,4 +1,4 @@
-gradio==5.11.0
+gradio==5.31.0
 transformers
 diffusers
 flair==0.15.0
