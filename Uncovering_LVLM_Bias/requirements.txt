@@ -41,7 +41,7 @@ einops==0.7.0
 exceptiongroup==1.2.2
 executing==2.2.0
 fastjsonschema==2.21.1
-filelock==3.18.0
+filelock==3.20.1
 flash-attn==2.5.7
 fonttools==4.61.0
 fqdn==1.5.1
