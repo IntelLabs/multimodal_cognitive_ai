@@ -140,7 +140,7 @@ torchsde
 tqdm==4.67.1
 traitlets==5.9.0
 trampoline==0.1.2
-transformers==4.53.0
+transformers==5.0.0rc3
 typing_extensions==4.7.1
 tzdata==2023.3
 urllib3==2.6.3
