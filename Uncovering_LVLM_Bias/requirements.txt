@@ -28,7 +28,7 @@ cloudpathlib==0.16.0
 comm==0.2.2
 confection==0.1.4
 contourpy==1.2.0
-cryptography==46.0.6
+cryptography==46.0.7
 cycler==0.12.1
 cymem==2.0.8
 datasets==2.18.0
@@ -48,7 +48,7 @@ fqdn==1.5.1
 frozenlist==1.4.1
 fsspec==2024.2.0
 gensim==4.3.2
-Glances==4.5.3
+Glances==4.5.4
 gmpy2==2.2.1
 google-api-core==2.17.1
 google-api-python-client==2.121.0
@@ -107,7 +107,7 @@ multidict==6.0.5
 multiprocess==0.70.16
 murmurhash==1.0.10
 nbclient==0.10.2
-nbconvert==7.17.0
+nbconvert==7.17.1
 nbformat==5.10.4
 nest-asyncio==1.6.0
 networkx==3.4.2
@@ -136,7 +136,7 @@ patsy==0.5.6
 pdfminer.six==20251107
 pdfplumber==0.11.5
 pexpect==4.9.0
-pillow==12.1.1
+pillow==12.2.0
 platformdirs==4.3.7
 portalocker==2.8.2
 preshed==3.0.9
@@ -205,7 +205,7 @@ torchvision==0.17.1
 tornado==6.5.5
 tqdm==4.66.3
 traitlets==5.14.3
-transformers==4.53.0
+transformers==5.0.0rc3
 triton==2.2.0
 tsv==1.2
 typer==0.9.0
