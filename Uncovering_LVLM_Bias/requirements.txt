@@ -155,7 +155,7 @@ pycparser==2.22
 pydantic==2.6.3
 pydantic_core==2.16.3
 Pygments==2.19.1
-PyJWT==2.8.0
+PyJWT==2.13.0
 pylatexenc==2.10
 pyparsing==3.1.2
 pypdfium2==4.30.1
@@ -199,10 +199,10 @@ threadpoolctl==3.5.0
 tinycss2==1.4.0
 tokenizers==0.21.1
 tomli==2.2.1
-torch==2.8.0
+torch==2.12.0
 torchaudio==2.2.1
 torchvision==0.17.1
-tornado==6.5.5
+tornado==6.5.7
 tqdm==4.66.3
 traitlets==5.14.3
 transformers==5.0.0rc3
