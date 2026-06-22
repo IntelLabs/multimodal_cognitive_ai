@@ -95,7 +95,7 @@ pycparser==2.21
 pydantic==2.4.0
 pydantic_core==2.4.0
 Pygments==2.15.1
-PyJWT==2.8.0
+PyJWT==2.13.0
 pynvml==8.0.4
 python-dateutil==2.8.2
 python-editor==1.0.4
