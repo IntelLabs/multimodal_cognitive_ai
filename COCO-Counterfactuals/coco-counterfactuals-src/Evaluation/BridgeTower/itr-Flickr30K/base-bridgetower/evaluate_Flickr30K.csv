@@ -1,0 +1,2 @@
+model,T2I.recall@1,T2I.recall@5,T2I.recall@10,I2Trecall@1,I2Trecall@5,I2Trecall@10
+BridgeTower/bridgetower-large-itm-mlm-itc,51.5,85.2,92.0,59.199999999999996,88.8,94.5

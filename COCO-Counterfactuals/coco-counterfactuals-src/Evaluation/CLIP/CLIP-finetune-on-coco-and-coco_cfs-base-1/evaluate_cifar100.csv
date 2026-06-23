@@ -1,0 +1,2 @@
+model,accuracy
+/export/share/projects/mcai/COCO-Counterfactuals/checkpoints/CLIP/CLIP-finetune-on-coco-and-coco_cfs-base-1,0.671
